@@ -38,7 +38,7 @@ class Producto extends \Controllers\PublicController
             $this->verificarToken();
             if ($viewData['token'] != $_SESSION['productos_xss_token']) {
                 $time = time();
-              $token = md5(productos . $time);
+              $token = md5("productos" . $time);
                 $_SESSION['productos_xss_token'] = $token;
                 $_SESSION['productos_xss_token_tts'] = $time;
                 \Utilities\Site::redirectToWithMsg(

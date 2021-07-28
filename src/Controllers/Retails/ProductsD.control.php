@@ -30,7 +30,7 @@ class ProductsD extends \Controllers\PublicController{
 
     private function run(): void
     {
-        $_data = \Dao\Retails\CarritoDetailsPanel::getProductsDetails($this->ProdId);
+        $_data = \Dao\CarritoDetailsPanel::getProductsDetails($this->ProdId);
        // $_productMedia = \Dao\Client\Productos::getAllProductMedia($this->ProdId);
 
         if ($_data) 
