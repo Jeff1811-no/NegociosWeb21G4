@@ -16,7 +16,7 @@ class Productos extends \Controllers\PublicController {
             $viewData["productos"][] = $productos;
         }
         $time = time();
-        $token = md5(productos. $time);
+        $token = md5("productos". $time);
         $_SESSION["productos_xss_token"] = $token;
         $_SESSION["productos_xss_token_tts"] = $time;
         \Views\Renderer::render("mnt/productos", $viewData);

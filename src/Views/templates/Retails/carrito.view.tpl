@@ -3,7 +3,6 @@
 <table>
   <thead>
     <tr>
-          <th>#</th>
           <th>Descripción</th>
           <th>Cantidad</th>
           <th>Precio</th>
@@ -12,13 +11,11 @@
   <tbody>
     {{foreach carrito}}
     <tr>
-      <td>{{rownum}}</td>
       <td><a href="">{{producto}}</a></td>
       <td>{{cantidad}}</td>
       <td>{{precio}}</td>
-      <td>{{fechacompra}}</td>
       <td class="center">
-        <a>Eliminar</a>
+        <button href="#" class="btn btn-primary">Eliminar</button>
       </td>
     </tr>
     {{endfor carrito}}
