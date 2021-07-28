@@ -11,10 +11,7 @@ class Carrito extends \Controllers\PrivateController {
         $tmpCarrito = \Dao\CarritoPanel::getCarritoById($usuario);
         $viewData["carrito"] = array();
         $counter = 0;
-
         foreach ($tmpCarrito as $carrito) {
-            $counter ++;
-            $carrito["rownum"] = $counter;
             $viewData["carrito"][] = $carrito;
         }
         $time = time();

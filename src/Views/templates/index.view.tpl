@@ -1,7 +1,10 @@
 <section>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
+  <div class="carousel-item active">
+      <img class="d-block w-100" src="/{{BASE_DIR}}/public/img/Cheems.png" alt="First slide">
+    </div>
+    <div class="carousel-item">
       <img class="d-block w-100" src="https://holatelcel.com/wp-content/uploads/2020/09/cheems-1280x720.png" alt="First slide">
     </div>
     <div class="carousel-item">
@@ -31,7 +34,7 @@
           <h5 class="card-title">{{ProdNombre}}</h5>
           <p class="card-text">{{ProdDescripcion}}</p>
           <p class="font-weight-light">{{ProdPrecioVenta}}</p>
-          <button href="#" class="btn btn-primary">Ver producto</butt>
+          <button href="#" class="btn btn-primary">Ver producto</button>
         </div>
     </div>  
     </div>
