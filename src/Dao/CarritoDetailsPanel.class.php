@@ -22,14 +22,7 @@ class CarritoDetailsPanel extends Table{
 
     }
 
-    public static function getProductsDetails($ProdId)
-    {
-        $sqlstr = "SELECT a.ProdId, a.ProdNombre, a.ProdDescripcion, a.ProdPrecioVenta, a.ProdPrecioCompra, a.ProdEst, a.ProdStock
-        FROM productos a 
-        WHERE a.ProdId=:ProdId;";
-        return self::obtenerUnRegistro($sqlstr, array("ProdId"=>$ProdId));
-    }
-
+   
 
 
 
