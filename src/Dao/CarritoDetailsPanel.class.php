@@ -1,7 +1,7 @@
 <?php 
 namespace Dao;
 
-class CarritoPanel extends Table{
+class CarritoDetailsPanel extends Table{
     /*
     `usuario` bigint(10) NOT NULL,
     `producto` bigint(18) NOT NULL,
@@ -11,8 +11,9 @@ class CarritoPanel extends Table{
     
     */
 
+   
 
-    public static function getCarritoById($id)
+    public static function getCarritoDetailsById($id)
     {
         $sqlstr = "SELECT * from carritousuario where usuario=:id;";
         $parameters = array("id" => $id);
@@ -20,6 +21,17 @@ class CarritoPanel extends Table{
         return $registro;
 
     }
+
+    public static function getProductsDetails($ProdId)
+    {
+        $sqlstr = "SELECT a.ProdId, a.ProdNombre, a.ProdDescripcion, a.ProdPrecioVenta, a.ProdPrecioCompra, a.ProdEst, a.ProdStock
+        FROM productos a 
+        WHERE a.ProdId=:ProdId;";
+        return self::obtenerUnRegistro($sqlstr, array("ProdId"=>$ProdId));
+    }
+
+
+
 
     public static function addCarrito($usuario, $producto, $cantidad, $precio)
     {

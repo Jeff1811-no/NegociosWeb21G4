@@ -4,7 +4,7 @@ namespace Controllers\Mnt;
 
 use Utilities\ArrUtils;
 
-class Heroe extends \Controllers\PrivateController
+class Heroe extends \Controllers\PublicController
 {
     public function run():void
     {
