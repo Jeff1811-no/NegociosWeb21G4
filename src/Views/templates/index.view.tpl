@@ -1,19 +1,45 @@
-<h1>{{page}}</h1>
-<h2>{{algoMas}}</h2>
-
 <section>
-  {{foreach heroes}}
-    <section class="hero">
-      <img src="/{{~BASE_DIR}}/{{heroimgurl}}">
-      <section class="action">
-          {{heroname}}
-          <br/>
-          {{heroaction}}
-      </section>
-      <hr/>
-    </section>
-  {{endfor heroes}}
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="https://holatelcel.com/wp-content/uploads/2020/09/cheems-1280x720.png" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://los40.cl/wp-content/uploads/2020/06/167a5b9eb045e51326067d784a827539.jpg" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://www.elsiglodetorreon.com.mx/m/i/2021/06/1438795.jpeg" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 </section>
+<section>
+<div class="card-deck">
+  {{foreach items}}
+    <div class="col-4 mt-5">
+     <div class="card">
+        <img class="card-img-top" src="https://holatelcel.com/wp-content/uploads/2020/09/cheems-memes-9.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ProdNombre}}</h5>
+          <p class="card-text">{{ProdDescripcion}}</p>
+          <p class="font-weight-light">{{ProdPrecioVenta}}</p>
+          <button href="#" class="btn btn-primary">Ver producto</butt>
+        </div>
+    </div>  
+    </div>
+  {{endfor items}}
+  </div>
+</section>
+
+
 <section>
   Top 5 Pianos a la venta
 </section>
@@ -21,3 +47,9 @@
 <section>
   Top 5 Partituras
 </section>
+
+<style>
+.card {}
+</style>
+
+
