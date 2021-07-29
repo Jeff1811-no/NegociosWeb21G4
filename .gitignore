@@ -4,4 +4,3 @@ vendor
 .phpdoc
 data
 .vscode
-generator.py

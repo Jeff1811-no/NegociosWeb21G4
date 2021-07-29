@@ -51,7 +51,7 @@ class Rol extends \Controllers\PrivateController
             switch($viewData['mode']) {
             case 'INS':
                 $ok = \Dao\RolesPanel::addRol(
-                    $viewData["rolesdsc"],
+                    $viewData["rolescod"],
                     $viewData["rolesdsc"],
                     $viewData["rolesest"]
 

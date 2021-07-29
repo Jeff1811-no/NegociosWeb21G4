@@ -8,6 +8,20 @@ class FuncionRol extends \Controllers\PublicController
 {
     public function run():void
     {
+
+        $tmpFunciones = \Dao\FuncionesPanel::getActiveFunciones();
+        $viewData["funciones"] = array();
+        foreach ($tmpFunciones as $funciones) {
+            $viewData["funciones"][] = $funciones;
+        }
+
+        $tmpRoles = \Dao\RolesPanel::getActiveRoles();
+        $viewData["roles"] = array();
+        foreach ($tmpRoles as $roles) {
+            $viewData["roles"][] = $roles;
+        }
+
+
         $viewData = array();
         $ModalTitles = array(
             'INS' => 'Nuevo FuncionesRolesPanel',
@@ -17,7 +31,7 @@ class FuncionRol extends \Controllers\PublicController
         );
 
         $viewData['ModalTitle'] = '';
-        $viewData["rolescod"] = 0;
+        $viewData["rolescod"] = "";
         $viewData["fncod"] = "";
         $viewData["fnrolest"] = 'ACT';
 

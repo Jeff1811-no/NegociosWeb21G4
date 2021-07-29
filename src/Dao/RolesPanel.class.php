@@ -47,9 +47,9 @@ class RolesPanel extends Table{
     {
         $updSQL = "UPDATE `roles` set `rolesdsc`=:rolesdsc, `rolesest`=:rolesest where `rolescod`=:rolescod;";
         $parameters = array(
-           'rolesdsc' => $rolesdsc,
+            'rolesdsc' => $rolesdsc,
             'rolesest' => $rolesest,
-           'rolescod' => $rolescod
+            'rolescod' => $rolescod
         );
 
         return self::executeNonQuery($updSQL, $parameters);

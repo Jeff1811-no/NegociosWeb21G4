@@ -6,7 +6,7 @@
   <form action="index.php?page=admin_rol" method="POST" class="col-12 col-m-8 offset-m-2">
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="rolescodd">Código</label>
-      <input class="col-12 col-m-9" readonly disabled type="text" name="rolescodd" id="rolescodd" placehoder="Código" value="{{rolescod}}"/>
+      <input class="col-12 col-m-9" {{readonly}} type="text" name="rolescodd" id="rolescodd" placehoder="Código" value="{{rolescod}}"/>
       <input type="hidden" name="mode" value="{{mode}}" />
       <input type="hidden" name="rolescod" value="{{rolescod}}" />
       <input type="hidden" name="token" value="{{roles_xss_token}}" />
@@ -47,7 +47,7 @@
     btnCancelar.addEventListener("click", (e)=>{
       e.preventDefault();
       e.stopPropagation();
-      window.location.assign("index.php?page=mnt_roles");
+      window.location.assign("index.php?page=admin_roles");
     });
   });
 </script>

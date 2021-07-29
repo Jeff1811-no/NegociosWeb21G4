@@ -34,10 +34,10 @@ class FuncionesRolesPanel extends Table{
 
     public static function addFuncionRol($fncod, $fnrolest)
     {
-        $insSQL = "INSERT INTO `funciones_roles` (`fncod`, `fnrolest`) VALUES (:fncod, :fnrolest);";
+        $insSQL = "INSERT INTO `funciones_roles` (`fncod`, `fnrolest`, `fnexp`) VALUES (:fncod, :fnrolest, '2030-01-01');";
         $parameters = array(
             'fncod' => $fncod,
-'fnrolest' => $fnrolest
+            'fnrolest' => $fnrolest
         );
 
         return self::executeNonQuery($insSQL, $parameters);
@@ -47,9 +47,9 @@ class FuncionesRolesPanel extends Table{
     {
         $updSQL = "UPDATE `funciones_roles` set `fncod`=:fncod, `fnrolest`=:fnrolest where `rolescod`=:rolescod;";
         $parameters = array(
-           'fncod' => $fncod,
-'fnrolest' => $fnrolest,
-           'rolescod' => $rolescod
+            'fncod' => $fncod,
+            'fnrolest' => $fnrolest,
+            'rolescod' => $rolescod
         );
 
         return self::executeNonQuery($updSQL, $parameters);
