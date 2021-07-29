@@ -3,7 +3,7 @@
   <h1>{{ModalTitle}}</h1>
 </section>
 <section class="container-m row depth-1 px-4 py-4">
-  <form action="index.php?page=mnt_rol" method="POST" class="col-12 col-m-8 offset-m-2">
+  <form action="index.php?page=admin_rol" method="POST" class="col-12 col-m-8 offset-m-2">
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="rolescodd">Código</label>
       <input class="col-12 col-m-9" readonly disabled type="text" name="rolescodd" id="rolescodd" placehoder="Código" value="{{rolescod}}"/>

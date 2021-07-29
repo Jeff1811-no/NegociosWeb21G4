@@ -3,10 +3,10 @@ from numpy import *
 
 ############### SECCIÓN DE PARÁMETROS EDITABLES ####################
 nombre_carpeta = "NegociosWeb21G4" #Nombre de la carpeta donde estás trabajando
-dao_name = "ProductosPanel" #Nombre del Dao
-plural_name = "Productos" #Identificador en plural
-table_name = "productos" #Nombre de la tabla como está en la base de datos
-singular_name = "Producto" #Identificador en singular
+dao_name = "FuncionesRolesPanel" #Nombre del Dao
+plural_name = "FuncionesRoles" #Identificador en plural
+table_name = "funciones_roles" #Nombre de la tabla como está en la base de datos
+singular_name = "FuncionRol" #Identificador en singular
 ####################################################################
 
 lowerSingular = singular_name.lower()
@@ -33,7 +33,7 @@ for i in range(0, campos):
 
 ################ CREACIÓN DEL DAO #####################
 
-f = open("/Applications/MAMP/htdocs/nw/"+nombre_carpeta+"/src/Dao/"+dao_name+".class.php",'w')
+f = open("K:/Programs/xampp/htdocs/NegociosWeb21G4/src/Dao/"+dao_name+".class.php",'w')
 
 longitud = len(table_data)
 parameters = ""
@@ -162,7 +162,7 @@ f.close()
 
 ########################## INICIO CREACIÓN DE CONTROLADORES ##########################################
 
-f2 = open("/Applications/MAMP/htdocs/nw/"+nombre_carpeta+"/src/Controllers/Mnt/"+singular_name+".control.php","w")
+f2 = open("K:/Programs/xampp/htdocs/NegociosWeb21G4/src/Controllers/Mnt/"+singular_name+".control.php","w")
 
 contenido = """<?php
 
@@ -197,7 +197,7 @@ class """+singular_name+""" extends \Controllers\PublicController
             $this->verificarToken();
             if ($viewData['token'] != $_SESSION['"""+lowerPlural+"""_xss_token']) {
                 $time = time();
-              $token = md5("""+lowerPlural+""" . $time);
+                $token = md5("""+comillas+lowerPlural+comillas+""" . $time);
                 $_SESSION['"""+lowerPlural+"""_xss_token'] = $token;
                 $_SESSION['"""+lowerPlural+"""_xss_token_tts'] = $time;
                 """+slash+"""Utilities\Site::redirectToWithMsg(
@@ -313,7 +313,7 @@ f2.close()
 
 ##################### INICIO CONTROLADOR #2 ########################
 
-f3 = open("/Applications/MAMP/htdocs/nw/"+nombre_carpeta+"/src/Controllers/Mnt/"+plural_name+".control.php","w")
+f3 = open("K:/Programs/xampp/htdocs/NegociosWeb21G4/src/Controllers/Mnt/"+plural_name+".control.php","w")
 
 contenido = """<?php
 
@@ -325,7 +325,7 @@ class """+plural_name+""" extends \Controllers\PublicController {
     {
         $viewData = array();
         $tmp"""+plural_name+""" = \Dao"""+slash+dao_name+"""::getAll"""+plural_name+"""();
-        $viewData["""+comillas+plural_name+comillas+"""] = array();
+        $viewData["""+comillas+lowerPlural+comillas+"""] = array();
         $counter = 0;
         foreach ($tmp"""+plural_name+""" as $"""+lowerPlural+""") {
             $counter ++;
@@ -333,7 +333,7 @@ class """+plural_name+""" extends \Controllers\PublicController {
             $viewData["""+comillas+lowerPlural+comillas+"""][] = $"""+lowerPlural+""";
         }
         $time = time();
-        $token = md5("""+lowerPlural+""". $time);
+        $token = md5("""+comillas+lowerPlural+comillas+""". $time);
         $_SESSION["""+comillas+lowerPlural+"""_xss_token"] = $token;
         $_SESSION["""+comillas+lowerPlural+"""_xss_token_tts"] = $time;
         \Views\Renderer::render("mnt/"""+lowerPlural+comillas+""", $viewData);
@@ -350,7 +350,7 @@ f3.close()
 
 
 #################### INICIO VIEW TEMPLATE 1 ###########################
-f4 = open("/Applications/MAMP/htdocs/nw/"+nombre_carpeta+"/src/Views/templates/mnt/"+lowerPlural+".view.tpl","w")
+f4 = open("K:/Programs/xampp/htdocs/NegociosWeb21G4/src/Views/templates/mnt/"+lowerPlural+".view.tpl","w")
 
 contenido = """<h1>Listado de """+dao_name+"""</h1>
 <section class="WWList container-m">
@@ -369,7 +369,7 @@ contenido = """<h1>Listado de """+dao_name+"""</h1>
       <td class="center">
         <a href="index.php?page=mnt_"""+lowerSingular+"""&mode=UPD&id="""+abrellave+abrellave+table_data[0]+cierrallave+cierrallave+comillas+""">Editar</a>
         &nbsp;
-        <a href="index.php?page=mnt_"""+lowerSingular+"""&mode=DEL&id="""+abrellave+abrellave+table_data[0]+cierrallave+cierrallave+comillas+"""">Eliminar</a>
+        <a href="index.php?page=mnt_"""+lowerSingular+"""&mode=DEL&id="""+abrellave+abrellave+table_data[0]+cierrallave+cierrallave+comillas+""">Eliminar</a>
       </td>
     </tr>
     {{endfor """+lowerPlural+"""}}
@@ -384,7 +384,7 @@ f4.close()
 #################### FIN VIEW TEMPLATE 1 ###########################
 
 #################### INICIO VIEW TEMPLATE 2 ###########################
-f5 = open("/Applications/MAMP/htdocs/nw/"+nombre_carpeta+"/src/Views/templates/mnt/"+lowerSingular+".view.tpl","w")
+f5 = open("K:/Programs/xampp/htdocs/NegociosWeb21G4/src/Views/templates/mnt/"+lowerSingular+".view.tpl","w")
 
 contenido = """
 <section class="container-m row depth-1 px-4 py-4">
@@ -394,7 +394,7 @@ contenido = """
   <form action="index.php?page=mnt_"""+lowerSingular+"""" method="POST" class="col-12 col-m-8 offset-m-2">
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="""+comillas+table_data[0]+"d"+comillas+""">Código</label>
-      <input class="col-12 col-m-9" readonly disabled type="text" name="""+comillas+table_data[0]+"d"+comillas+""" ="""+comillas+table_data[0]+"d"+comillas+""" placehoder="Código" value="""+comillas+abrellave+abrellave+table_data[0]+cierrallave+cierrallave+comillas+"""/>
+      <input class="col-12 col-m-9" readonly disabled type="text" name="""+comillas+table_data[0]+"d"+comillas+""" id="""+comillas+table_data[0]+"d"+comillas+""" placehoder="Código" value="""+comillas+abrellave+abrellave+table_data[0]+cierrallave+cierrallave+comillas+"""/>
       <input type="hidden" name="mode" value="{{mode}}" />
       <input type="hidden" name="""+comillas+table_data[0]+comillas+""" value="""+comillas+abrellave+abrellave+table_data[0]+cierrallave+cierrallave+comillas+""" />
       <input type="hidden" name="token" value="{{"""+lowerPlural+"""_xss_token}}" />
@@ -402,7 +402,7 @@ contenido = """
     """+htmlTable2+"""
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="""+comillas+table_data[longitud-1]+comillas+""">Estado</label>
-      <select name="""+comillas+table_data[longitud-1]+comillas+"""" id="""+comillas+table_data[longitud-1]+comillas+""" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
+      <select name="""+comillas+table_data[longitud-1]+comillas+""" id="""+comillas+table_data[longitud-1]+comillas+""" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
         <option value="ACT" {{if """+table_data[longitud-1]+"""_act}}selected{{endif """+table_data[longitud-1]+"""_act}}>Mostrar</option>
         <option value="INA" {{if """+table_data[longitud-1]+"""_ina}}selected{{endif """+table_data[longitud-1]+"""_ina}}>Ocultar</option>
       </select>

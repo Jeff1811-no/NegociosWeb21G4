@@ -8,6 +8,9 @@
       <th>Código</th>
       <th>Correo</th>
       <th>Estado</th>
+      {{if Admin}}
+      <th>Rol</th>
+      {{endif Admin}}
       <th>
         {{if CanInsert}}
         <a href="index.php?page=mnt_usuario&mode=INS&id=0">Nuevo</a>
@@ -29,6 +32,9 @@
           {{endifnot ~CanView}}
         </td>
         <td>{{userest}}</td>
+        {{if ~Admin}}
+        <td>{{roles}}</td>
+        {{endif ~Admin}}
         <td>
           {{if ~CanUpdate}}
           <a href="index.php?page=mnt_usuario&mode=UPD&id={{usercod}}"
