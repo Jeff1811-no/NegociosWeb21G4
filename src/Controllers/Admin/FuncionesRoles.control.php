@@ -2,7 +2,7 @@
 
 namespace Controllers\Admin;
 
-class FuncionesRoles extends \Controllers\PublicController {
+class FuncionesRoles extends \Controllers\PrivateController {
 
     public function run():void
     {

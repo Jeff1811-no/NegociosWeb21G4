@@ -4,28 +4,27 @@ namespace Controllers\Admin;
 
 use Utilities\ArrUtils;
 
-class FuncionRol extends \Controllers\PublicController
+class FuncionRol extends \Controllers\PrivateController
 {
     public function run():void
     {
 
         $tmpFunciones = \Dao\FuncionesPanel::getActiveFunciones();
-        $viewData["funciones"] = array();
-        foreach ($tmpFunciones as $funciones) {
-            $viewData["funciones"][] = $funciones;
-        }
+        // foreach ($tmpFunciones as $funciones) {
+        //     $funciones["fncod"];
+            
+        // }
 
         $tmpRoles = \Dao\RolesPanel::getActiveRoles();
-        $viewData["roles"] = array();
-        foreach ($tmpRoles as $roles) {
-            $viewData["roles"][] = $roles;
-        }
-
+        // var_dump($tmpRoles);
+        // die();
+        // foreach ($tmpRoles as $roles) {
+        //     $roles["rolescod"];
+        // }
 
         $viewData = array();
         $ModalTitles = array(
             'INS' => 'Nuevo FuncionesRolesPanel',
-            'UPD' => 'Actualizando %s - %s',
             'DSP' => 'Detalle de %s - %s',
             'DEL' => 'Eliminado %s - %s'
         );
@@ -65,6 +64,7 @@ class FuncionRol extends \Controllers\PublicController
             switch($viewData['mode']) {
             case 'INS':
                 $ok = \Dao\FuncionesRolesPanel::addFuncionRol(
+                    $viewData["rolescod"],
                     $viewData["fncod"],
                     $viewData["fnrolest"]
 
@@ -73,20 +73,6 @@ class FuncionRol extends \Controllers\PublicController
                     \Utilities\Site::redirectToWithMsg(
                         'index.php?page=admin_funcionesroles',
                         'FuncionesRolesPanel agregado Exitosamente'
-                    );
-                }
-                break;
-            case 'UPD':
-                $ok = \Dao\FuncionesRolesPanel::updateFuncionRol(
-                    $viewData["fncod"],
-                    $viewData["fnrolest"],
-                    $viewData["rolescod"]
-
-                );
-                if ($ok) {
-                    \Utilities\Site::redirectToWithMsg(
-                        'index.php?page=admin_funcionesroles',
-                        'FuncionesRolesPanel actualizado Exitosamente'
                     );
                 }
                 break;
@@ -137,7 +123,8 @@ class FuncionRol extends \Controllers\PublicController
             }
 
         }
-
+        $viewData['rolesCombo'] = $this->arrayToCombo($tmpRoles, "rolescod", "rolesdsc", $viewData['rolescod']);
+        $viewData['funcionesCombo'] = $this->arrayToCombo($tmpFunciones, "fncod", "fndsc", $viewData['fncod']);
         \Views\Renderer::render('admin/funcionrol', $viewData);
     }
 
@@ -156,6 +143,14 @@ class FuncionRol extends \Controllers\PublicController
                 );
             }
         }
+    }
+
+    private function arrayToCombo($arreglo, $valueField, $textField, $selectedValue){
+        $htmlBuffer = "";
+        foreach ($arreglo as $item) {
+            $htmlBuffer .= '<option value="'.$item[$valueField].'" '.(($selectedValue == $item[$valueField])? "selected" : "" ).'>'.$item[$textField].'</option>';
+        }
+        return $htmlBuffer;
     }
 
 }

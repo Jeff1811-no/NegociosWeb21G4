@@ -23,13 +23,13 @@
       <tr>
         <td>{{usercod}}</td>
         <td>
-          {{if ~CanView}}
-          <a href="index.php?page=mnt_usuario&mode=DSO&id={{usercod}}">{{useremail}}</a>
-          {{endif ~CanView}}
+          {{if CanView}}
+            <a href="index.php?page=mnt_usuario&mode=DSO&id={{usercod}}">{{useremail}}</a>
+          {{endif CanView}}
 
-          {{ifnot ~CanView}}
+          {{ifnot CanView}}
               {{useremail}}
-          {{endifnot ~CanView}}
+          {{endifnot CanView}}
         </td>
         <td>{{userest}}</td>
         {{if ~Admin}}

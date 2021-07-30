@@ -37,11 +37,11 @@ class ProductosPanel extends Table{
         $insSQL = "INSERT INTO `productos` (`ProdNombre`, `ProdDescripcion`, `ProdPrecioVenta`, `ProdPrecioCompra`, `ProdStock`, `ProdEst`) VALUES (:ProdNombre, :ProdDescripcion, :ProdPrecioVenta, :ProdPrecioCompra, :ProdStock, :ProdEst);";
         $parameters = array(
             'ProdNombre' => $ProdNombre,
-'ProdDescripcion' => $ProdDescripcion,
-'ProdPrecioVenta' => $ProdPrecioVenta,
-'ProdPrecioCompra' => $ProdPrecioCompra,
-'ProdStock' => $ProdStock,
-'ProdEst' => $ProdEst
+            'ProdDescripcion' => $ProdDescripcion,
+            'ProdPrecioVenta' => $ProdPrecioVenta,
+            'ProdPrecioCompra' => $ProdPrecioCompra,
+            'ProdStock' => $ProdStock,
+            'ProdEst' => $ProdEst
         );
 
         return self::executeNonQuery($insSQL, $parameters);
@@ -51,13 +51,13 @@ class ProductosPanel extends Table{
     {
         $updSQL = "UPDATE `productos` set `ProdNombre`=:ProdNombre, `ProdDescripcion`=:ProdDescripcion, `ProdPrecioVenta`=:ProdPrecioVenta, `ProdPrecioCompra`=:ProdPrecioCompra, `ProdStock`=:ProdStock, `ProdEst`=:ProdEst where `ProdId`=:ProdId;";
         $parameters = array(
-           'ProdNombre' => $ProdNombre,
-'ProdDescripcion' => $ProdDescripcion,
-'ProdPrecioVenta' => $ProdPrecioVenta,
-'ProdPrecioCompra' => $ProdPrecioCompra,
-'ProdStock' => $ProdStock,
-'ProdEst' => $ProdEst,
-           'ProdId' => $ProdId
+            'ProdNombre' => $ProdNombre,
+            'ProdDescripcion' => $ProdDescripcion,
+            'ProdPrecioVenta' => $ProdPrecioVenta,
+            'ProdPrecioCompra' => $ProdPrecioCompra,
+            'ProdStock' => $ProdStock,
+            'ProdEst' => $ProdEst,
+            'ProdId' => $ProdId
         );
 
         return self::executeNonQuery($updSQL, $parameters);

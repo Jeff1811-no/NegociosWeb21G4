@@ -32,10 +32,11 @@ class RolesPanel extends Table{
 
     }
 
-    public static function addRol($rolesdsc, $rolesest)
+    public static function addRol($rolescod, $rolesdsc, $rolesest)
     {
-        $insSQL = "INSERT INTO `roles` (`rolesdsc`, `rolesest`) VALUES (:rolesdsc, :rolesest);";
+        $insSQL = "INSERT INTO `roles` (`rolescod`, `rolesdsc`, `rolesest`) VALUES (:rolescod, :rolesdsc, :rolesest);";
         $parameters = array(
+            'rolescod' => $rolescod,
             'rolesdsc' => $rolesdsc,
             'rolesest' => $rolesest
         );
@@ -45,8 +46,9 @@ class RolesPanel extends Table{
 
     public static function updateRol($rolesdsc, $rolesest, $rolescod)
     {
-        $updSQL = "UPDATE `roles` set `rolesdsc`=:rolesdsc, `rolesest`=:rolesest where `rolescod`=:rolescod;";
+        $updSQL = "UPDATE `roles` set `rolescod`=:rolesdsc `rolesdsc`=:rolesdsc, `rolesest`=:rolesest where `rolescod`=:rolescod;";
         $parameters = array(
+            'rolescod' => $rolesdsc,
             'rolesdsc' => $rolesdsc,
             'rolesest' => $rolesest,
             'rolescod' => $rolescod

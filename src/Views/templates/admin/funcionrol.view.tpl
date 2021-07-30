@@ -6,14 +6,18 @@
   <form action="index.php?page=admin_funcionrol" method="POST" class="col-12 col-m-8 offset-m-2">
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="rolescodd">Rolescod</label>
-      <input class="col-12 col-m-9" {{readonly}} type="text" name="rolescodd" id="rolescodd" placehoder="Rolescod" value="{{rolescod}}"/>
+      <select name="rolescodd" id="rolescodd" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
+        {{rolesCombo}}
+      </select>
       <input type="hidden" name="mode" value="{{mode}}" />
       <input type="hidden" name="rolescod" value="{{rolescod}}" />
       <input type="hidden" name="token" value="{{funcionesroles_xss_token}}" />
     </div>
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="fncod">fncod</label>
-      <input class="col-12 col-m-9"{{readonly}} type="text" name="fncod" id="fncod" placehoder="fncod" value="{{fncod}}" />
+      <select name="rolescodd" id="rolescodd" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
+        {{funcionesCombo}}
+      </select>
     </div>
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="fnrolest">Estado</label>

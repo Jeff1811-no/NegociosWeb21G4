@@ -48,6 +48,7 @@ class Security {
             $functionInDb = \Dao\Security\Security::getFeature($function);
             if (!$functionInDb) {
                 \Dao\Security\Security::addNewFeature($function, $function, "ACT", "CTR");
+                \Dao\FuncionesRolesPanel::addFuncionRol("ADMIN",$function, "ACT","2030-01-01");
             }
         }
         return \Dao\Security\Security::getFeatureByUsuario($userId, $function);
