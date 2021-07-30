@@ -10,7 +10,6 @@ class Carrito extends \Controllers\PrivateController {
         $usuario = \Utilities\Security::getUserId();
         $tmpCarrito = \Dao\CarritoPanel::getCarritoById($usuario);
         $viewData["carrito"] = array();
-        $counter = 0;
         foreach ($tmpCarrito as $carrito) {
             $viewData["carrito"][] = $carrito;
         }

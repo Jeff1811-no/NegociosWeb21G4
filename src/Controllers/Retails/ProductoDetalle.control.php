@@ -2,14 +2,14 @@
 
 namespace Controllers\Retails;
 
-class Productos extends \Controllers\PublicController {
+class ProductoDetalle extends \Controllers\PublicController {
 
     public function run():void
     {
-        $viewData = array();
-        $tmpProductos = \Dao\ProductosPanel::getProductoById();
-        $viewData["Producto"] = array();
-        \Views\Renderer::render("retails/productosdetalle", $viewData);
+        
+        $tmpProducto = \Dao\ProductosPanel::getProductoById(1);
+        
+        \Views\Renderer::render("retails/productodetalle", $tmpProducto);
     }
 }
 
