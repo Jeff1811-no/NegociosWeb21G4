@@ -15,7 +15,7 @@
       <td class="center">
         <a href="index.php?page=mnt_producto&mode=UPD&id={{ProdId}}">Editar</a>
         &nbsp;
-        <a href="index.php?page=mnt_producto&mode=DEL&id={{ProdId}}"">Eliminar</a>
+        <a href="index.php?page=mnt_producto&mode=DEL&id={{ProdId}}">Eliminar</a>
       </td>
     </tr>
     {{endfor productos}}

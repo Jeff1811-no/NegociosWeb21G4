@@ -34,7 +34,7 @@
           <h5 class="card-title">{{ProdNombre}}</h5>
           <p class="card-text">{{ProdDescripcion}}</p>
           <p class="font-weight-light">{{ProdPrecioVenta}}</p>
-          <button href="#" class="btn btn-primary">Ver producto</button>
+          <button href="index.php?page=retails_productodetalle&id={{ProdId}}" class="btn btn-primary">Ver producto</button>
         </div>
     </div>  
     </div>

@@ -37,9 +37,7 @@ class Index extends PublicController
         */
         $viewData = array();
         $viewData["page"] = $this->toString();
-        $viewData["heroes"] = \Dao\HeroPanel::getActiveHeroeos();
         $viewData["items"] = \Dao\ProductosPanel::getAllProductos();
-        $viewData["algoMas"] = "Esto es algo mas que se envia a la vista";
         \Views\Renderer::render("index", $viewData);
     }
 }
