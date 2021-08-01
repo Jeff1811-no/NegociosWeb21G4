@@ -41,7 +41,8 @@ class FuncionRol extends \Controllers\PrivateController
 
         if ($this->isPostBack()) {
             $viewData['mode'] = $_POST['mode'];
-            $viewData['rolescod'] = $_POST['rolescod'];
+            $viewData['rolescod'] = $_POST['rolesCombo'];
+            $viewData['fncod'] = $_POST['funcionesCombo'];
             $viewData['token'] = $_POST['token'];
 
             $this->verificarToken();
@@ -57,7 +58,7 @@ class FuncionRol extends \Controllers\PrivateController
             }
 
             if ($viewData['mode'] != 'DEL') {
-               $viewData["fncod"] = $_POST["fncod"];
+                $viewData["fncod"] = $_POST["funcionesCombo"];
                 $viewData["fnrolest"] = $_POST["fnrolest"];
 
             }

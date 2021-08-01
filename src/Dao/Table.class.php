@@ -91,7 +91,8 @@ abstract class Table
     }
 
     protected static function executeNonQuery($sqlstr, $params,  &$conn = null)
-    {
+    {   
+        // $lastId = null;
         $pConn = null;
         if ($conn != null) {
             $pConn = $conn;
@@ -102,6 +103,10 @@ abstract class Table
         foreach ($params as $key => &$value) {
             $query->bindParam(":" . $key, $value, self::getBindType($value));
         }
+        // if($query->execute()){
+        //     $lastId = $pConn->lastInsertId();
+        //     $query["lastId"] = $lastId;
+        // }
         return $query->execute();
     }
 

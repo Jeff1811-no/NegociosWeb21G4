@@ -34,14 +34,27 @@
           <h5 class="card-title">{{ProdNombre}}</h5>
           <p class="card-text">{{ProdDescripcion}}</p>
           <p class="font-weight-light">{{ProdPrecioVenta}}</p>
-          <button href="index.php?page=retails_productodetalle&id={{ProdId}}" class="btn btn-primary">Ver producto</button>
+          <button data-href="index.php?page=retails_productodetalle&id={{ProdId}}" class="btn btn-primary id">Ver producto</button>
         </div>
     </div>  
     </div>
   {{endfor items}}
   </div>
 </section>
-
+<script>
+  document.addEventListener("DOMContentLoaded", ()=>{
+    const botones = document.getElementsByClassName("id");
+    for(i=0;i<botones.length;i++){
+      botones[i].addEventListener("click", (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      console.log(e.target);
+      var url=e.target.dataset.href;
+      window.location.assign(url);
+    });
+    }
+  });
+</script>
 
 <section>
   Top 5 Pianos a la venta

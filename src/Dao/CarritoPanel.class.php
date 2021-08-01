@@ -14,7 +14,7 @@ class CarritoPanel extends Table{
 
     public static function getCarritoById($id)
     {
-        $sqlstr = "SELECT * from carritousuario where usuario=:id;";
+        $sqlstr = "SELECT * from carritousuario WHERE usuario=:id;";
         $parameters = array("id" => $id);
         $registro = self::obtenerUnRegistro($sqlstr, $parameters);
         return $registro;

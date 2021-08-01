@@ -33,7 +33,16 @@ class Register extends PublicController
                 try{
                     if (\Dao\Security\Security::newUsuario($this->txtEmail, $this->txtPswd)) {
                         // TODO:: darle rol "Public" a los nuevos usuarios
-                        \Utilities\Site::redirectToWithMsg("index.php?page=sec_login", "¡Usuario Registrado Satisfactoriamente!");
+                        // \Dao\RolesUsuariosPanel::addRolUsuario($u["lastId"],"PUBLIC","ACT");
+                        $u = \Dao\Security\Security::getUsuarioByEmail($this->txtEmail);
+
+                        try{
+                            if(\Dao\RolesUsuariosPanel::addRolUsuario($u["usercod"],"PUBLIC","ACT")){
+                                \Utilities\Site::redirectToWithMsg("index.php?page=sec_login", "¡Usuario Registrado Satisfactoriamente!");
+                            }
+                        }catch (Error $ex){
+                            die($ex);
+                        }
                     }
                 } catch (Error $ex){
                     die($ex);

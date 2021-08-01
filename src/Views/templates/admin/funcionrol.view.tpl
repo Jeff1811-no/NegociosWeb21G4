@@ -6,7 +6,7 @@
   <form action="index.php?page=admin_funcionrol" method="POST" class="col-12 col-m-8 offset-m-2">
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="rolescodd">Rolescod</label>
-      <select name="rolescodd" id="rolescodd" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
+      <select name="rolesCombo" id="rolescodd" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
         {{rolesCombo}}
       </select>
       <input type="hidden" name="mode" value="{{mode}}" />
@@ -15,7 +15,7 @@
     </div>
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="fncod">fncod</label>
-      <select name="rolescodd" id="rolescodd" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
+      <select name="funcionesCombo" id="rolescodd" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
         {{funcionesCombo}}
       </select>
     </div>

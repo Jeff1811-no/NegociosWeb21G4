@@ -31,7 +31,7 @@
           <li><span>{{userName}}</span></li>
         {{endwith login}}
         <li><a href="index.php?page=retails_carrito">Carrito</a></li>
-        <li><a href="index.php?page=admin_admin">Inicio</a></li>
+        <li><a href="index.php">Inicio</a></li>
         {{foreach NAVIGATION}}
             <li><a href="{{nav_url}}">{{nav_label}}</a></li>
         {{endfor NAVIGATION}}

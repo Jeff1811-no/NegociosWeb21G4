@@ -3,10 +3,10 @@ from numpy import *
 
 ############### SECCIÓN DE PARÁMETROS EDITABLES ####################
 nombre_carpeta = "NegociosWeb21G4" #Nombre de la carpeta donde estás trabajando
-dao_name = "FuncionesPanel" #Nombre del Dao
-plural_name = "Funciones" #Identificador en plural
-table_name = "funciones" #Nombre de la tabla como está en la base de datos
-singular_name = "Funcion" #Identificador en singular
+dao_name = "RolesUsuariosPanel" #Nombre del Dao
+plural_name = "RolesUsuarios" #Identificador en plural
+table_name = "roles_usuarios" #Nombre de la tabla como está en la base de datos
+singular_name = "RolUsuario" #Identificador en singular
 ####################################################################
 
 lowerSingular = singular_name.lower()
