@@ -9,6 +9,7 @@ class Producto extends \Controllers\PublicController
     public function run():void
     {
         $viewData = array();
+        $idimg=0;
         $ModalTitles = array(
             'INS' => 'Nuevo ProductosPanel',
             'UPD' => 'Actualizando %s - %s',
@@ -24,12 +25,12 @@ class Producto extends \Controllers\PublicController
         $viewData["ProdPrecioCompra"] = "";
         $viewData["ProdStock"] = "";
         $viewData["ProdEst"] = 'ACT';
-
+        $viewData["ProdIMG"]="";
         $viewData['readonly'] = '';
         $viewData['showCommitBtn'] = true;
         $viewData['ProdEst_act'] = true;
         $viewData['ProdEst_ina'] = false;
-
+        
         if ($this->isPostBack()) {
             $viewData['mode'] = $_POST['mode'];
             $viewData['ProdId'] = $_POST['ProdId'];
@@ -116,7 +117,7 @@ class Producto extends \Controllers\PublicController
         } else {
 
             $ProdId = \Dao\ProductosPanel::getProductoById($viewData['ProdId']);
-
+            $idimg=$viewData['ProdId'];
             error_log(json_encode($ProdId));
             if (!$ProdId) {
                 \Utilities\Site::redirectToWithMsg(
@@ -129,6 +130,7 @@ class Producto extends \Controllers\PublicController
                 $ModalTitles[$viewData['mode']],
                 $viewData['ProdId'],
                 $viewData['ProdNombre']
+                
             );
             $viewData['ProdEst_act'] = $viewData['ProdEst'] == 'ACT';
             $viewData['ProdEst_ina'] = $viewData['ProdEst'] == 'INA';
@@ -139,9 +141,17 @@ class Producto extends \Controllers\PublicController
             }
 
         }
+        if(file_exists("public/img/$idimg.png") || file_exists("public/img/$idimg.jpg")){
+            $simg= file_exists("public/img/$idimg.png")? "$idimg.png":"$idimg.jpg";
+            $viewData['ProdIMG']="/public/img/$simg";
+            
+        }else{
+            $viewData['ProdIMG']="/public/img/Cheems.png";
+        } 
 
         \Views\Renderer::render('mnt/producto', $viewData);
     }
+
 
     private function verificarToken(){
         if (!isset($_SESSION['productos_xss_token'])) {

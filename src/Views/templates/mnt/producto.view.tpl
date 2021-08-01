@@ -4,9 +4,17 @@
 </section>
 <section class="container-m row depth-1 px-4 py-4">
   <form action="index.php?page=mnt_producto" method="POST" class="col-12 col-m-8 offset-m-2">
+  <div class="row my-2 align-center">
+  <label class="col-12 col-m-3"for="ProdIMG">Imagen</label>
+     <img src="/{{BASE_DIR}}{{ProdIMG}}"  style="max-width:250px" id="impp"class="img-thumbnail">
+     <form action="cambiarimg({{ProdId}})" method="POST" enctype="multipart/form-data">
+        <input id ="file" type="file" name="Imagen_perfil"/>
+        <input type="submit" value="aceptar"   />
+    </form>
+     </div>
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="ProdIdd">Código</label>
-      <input class="col-12 col-m-9" readonly disabled type="text" name="ProdIdd" ="ProdIdd" placehoder="Código" value="{{ProdId}}"/>
+      <input class="col-12 col-m-9" readonly disabled type="text" name="ProdIdd" id="ProdIdd" placehoder="Código" value="{{ProdId}}"/>
       <input type="hidden" name="mode" value="{{mode}}" />
       <input type="hidden" name="ProdId" value="{{ProdId}}" />
       <input type="hidden" name="token" value="{{productos_xss_token}}" />
@@ -29,7 +37,7 @@
 </div>
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="ProdEst">Estado</label>
-      <select name="ProdEst"" id="ProdEst" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
+      <select name="ProdEst" id="ProdEst" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
         <option value="ACT" {{if ProdEst_act}}selected{{endif ProdEst_act}}>Mostrar</option>
         <option value="INA" {{if ProdEst_ina}}selected{{endif ProdEst_ina}}>Ocultar</option>
       </select>
@@ -62,4 +70,8 @@
       window.location.assign("index.php?page=mnt_productos");
     });
   });
+
+  
+}
+
 </script>
