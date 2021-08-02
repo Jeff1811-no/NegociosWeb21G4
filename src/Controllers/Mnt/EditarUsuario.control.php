@@ -2,8 +2,6 @@
 
 namespace Controllers\Mnt;
 
-use Controllers\Sec\Login;
-use Dao\Dao;
 use Utilities\ArrUtils;
 
 class EditarUsuario extends \Controllers\PublicController
@@ -12,10 +10,7 @@ class EditarUsuario extends \Controllers\PublicController
     {
         $viewData = array();
         $ModalTitles = array(
-            'INS' => 'Nuevo EditarUsuarioPanel',
             'UPD' => 'Actualizando %s - %s',
-            'DSP' => 'Detalle de %s - %s',
-            'DEL' => 'Eliminado %s - %s'
         );
 
         $viewData['ModalTitle'] = '';
@@ -28,19 +23,8 @@ class EditarUsuario extends \Controllers\PublicController
         if ($this->isPostBack()) {
             $viewData['mode'] = $_POST['mode'];
             $viewData['usercod'] = $_POST['usercod'];
-            $viewData['token'] = $_POST['token'];
 
-            $this->verificarToken();
-            if ($viewData['token'] != $_SESSION['editarusuarios_xss_token']) {
-                $time = time();
-                $token = md5("editarusuarios" . $time);
-                $_SESSION['editarusuarios_xss_token'] = $token;
-                $_SESSION['editarusuarios_xss_token_tts'] = $time;
-                \Utilities\Site::redirectToWithMsg(
-                    'index.php?page=mnt_editarusuarios',
-                    'Algo sucedio mal intente de nuevo'
-                );
-            }
+            
 
             if ($viewData['mode'] != 'DEL') {
                 $viewData["useremail"] = $_POST["useremail"];
@@ -79,14 +63,13 @@ class EditarUsuario extends \Controllers\PublicController
         } else {
             $viewData['mode'] = $_GET['mode'];
             $viewData['usercod'] = isset($_GET['id'])? $_GET['id'] : 0;
-            $this->verificarToken();
         }
             $usercod = \Dao\Security\Security::getUserById($viewData['usercod']);
             $usercod['userpswd'] = '';
             error_log(json_encode($usercod));
             if (!$usercod) {
                 \Utilities\Site::redirectToWithMsg(
-                    'index.php?page=mnt_editarusuarios',
+                    'index.php?page=index',
                     'No existe el registro'
                 );
             }
@@ -97,23 +80,6 @@ class EditarUsuario extends \Controllers\PublicController
                 $viewData['useremail']
             );
         \Views\Renderer::render('mnt/editarusuario', $viewData);
-    }
-
-    private function verificarToken(){
-        if (!isset($_SESSION['editarusuarios_xss_token'])) {
-            \Utilities\Site::redirectToWithMsg(
-                'index.php?page=mnt_editarusuarios',
-                'Algo sucedio mal intente de nuevo'
-            );
-        } else {
-            $time = time();
-            if ($time - $_SESSION['editarusuarios_xss_token_tts'] > 86400) {
-                \Utilities\Site::redirectToWithMsg(
-                    'index.php?page=mnt_editarusuarios',
-                    'Algo sucedio mal intente de nuevo'
-                );
-            }
-        }
     }
 
 }

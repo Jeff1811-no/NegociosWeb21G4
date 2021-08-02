@@ -44,7 +44,7 @@
 
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="rolescod">Rolescod</label>
-      <select name="rolesCombo" id="rolescodd" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
+      <select name="rolesCombo" id="rolescod" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
         {{rolesCombo}}
       </select>
     </div>

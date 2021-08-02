@@ -9,7 +9,6 @@
       <input class="col-12 col-m-9" readonly disabled type="hidden" name="usercodd" id="usercodd" placehoder="Código" value="{{usercod}}"/>
       <input type="hidden" name="mode" value="{{mode}}" />
       <input type="hidden" name="usercod" value="{{usercod}}" />
-      <input type="hidden" name="token" value="{{editarusuarios_xss_token}}" />
     </div>
       <div class="row my-2 align-center">
         <label class="col-12 col-m-3" for="useremail">Correo Electronico</label>

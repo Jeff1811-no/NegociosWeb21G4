@@ -36,7 +36,6 @@
         {{endifnot showCommitBtn}}
       </button>
     </div>
-    </div>
   </form>
 </section>
 

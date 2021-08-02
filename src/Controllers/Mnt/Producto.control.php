@@ -117,7 +117,11 @@ class Producto extends \Controllers\PublicController
         } else {
 
             $ProdId = \Dao\ProductosPanel::getProductoById($viewData['ProdId']);
-            $idimg=$viewData['ProdId'];
+            $file = file_exists("public/img/".$viewData['ProdId'].".jpeg") ? $viewData['ProdId'].".jpeg" :
+              (file_exists("public/img/".$viewData['ProdId'].".jpg") ? $viewData['ProdId'].".jpg" : 
+              (file_exists("public/img/".$viewData['ProdId'].".png") ? $viewData['ProdId'].".png" : 
+              (file_exists("public/img/".$viewData['ProdId'].".gif") ? $viewData['ProdId'].".gif" : "Cheems.png")));
+            $viewData['ProdIMG']="/public/img/$file";
             error_log(json_encode($ProdId));
             if (!$ProdId) {
                 \Utilities\Site::redirectToWithMsg(
@@ -131,6 +135,7 @@ class Producto extends \Controllers\PublicController
                 $viewData['ProdId'],
                 $viewData['ProdNombre']
                 
+                
             );
             $viewData['ProdEst_act'] = $viewData['ProdEst'] == 'ACT';
             $viewData['ProdEst_ina'] = $viewData['ProdEst'] == 'INA';
@@ -141,13 +146,7 @@ class Producto extends \Controllers\PublicController
             }
 
         }
-        if(file_exists("public/img/$idimg.png") || file_exists("public/img/$idimg.jpg")){
-            $simg= file_exists("public/img/$idimg.png")? "$idimg.png":"$idimg.jpg";
-            $viewData['ProdIMG']="/public/img/$simg";
-            
-        }else{
-            $viewData['ProdIMG']="/public/img/Cheems.png";
-        } 
+        
 
         \Views\Renderer::render('mnt/producto', $viewData);
     }

@@ -31,7 +31,7 @@ class Register extends PublicController
             
             if (!$this->hasErrors) {
                 try{
-                    if (\Dao\Security\Security::newUsuario($this->txtEmail, $this->txtPswd)) {
+                    if (\Dao\Security\Security::newUsuario($this->txtEmail, "", $this->txtPswd)) {
                         // TODO:: darle rol "Public" a los nuevos usuarios
                         // \Dao\RolesUsuariosPanel::addRolUsuario($u["lastId"],"PUBLIC","ACT");
                         $u = \Dao\Security\Security::getUsuarioByEmail($this->txtEmail);

@@ -8,9 +8,6 @@ use Utilities\ArrUtils;
 
 class Usuario extends \Controllers\PrivateController
 {
-    private $notDisplayIns = false;
-    private $allInfoDisplayed = true;
-    private $mode = '';
 
     public function run():void
     {
