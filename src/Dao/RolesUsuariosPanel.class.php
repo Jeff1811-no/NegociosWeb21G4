@@ -32,6 +32,15 @@ class RolesUsuariosPanel extends Table{
 
     }
 
+    public static function getRolByUsuario($id)
+    {
+        $sqlstr = "SELECT * from roles_usuarios where usercod=:id;";
+        $parameters = array("id" => $id);
+        $registro = self::obtenerUnRegistro($sqlstr, $parameters);
+        return $registro;
+
+    }
+
     public static function addRolUsuario($usercod, $rolescod, $roleuserest)
     {
         $roleuserexp = date('Y-m-d', time() + 7776000);  //(3*30*24*60*60) (m d h mi s)

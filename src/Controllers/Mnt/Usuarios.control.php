@@ -34,6 +34,11 @@ class Usuarios extends PrivateController{
             $viewData["Usuarios"][] = $usuario;
         }
         
+
+        $time = time();
+        $token = md5("Usuarios". $time);
+        $_SESSION["users_xss_token"] = $token;
+        $_SESSION["users_xss_token_tts"] = $time;
         
         // href="index.php?page=mnt_usuario&mode=DSO&id={{usercod}}" agregar esto en private layout
 

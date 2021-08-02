@@ -47,7 +47,17 @@ class Security extends \Dao\Table
         return self::obtenerRegistros($sqlstr, array());
     }
 
-    static public function newUsuario($email, $password)
+
+    public static function getUserById($id)
+    {
+        $sqlstr = "SELECT * from usuario where usercod=:id;";
+        $parameters = array("id" => $id);
+        $registro = self::obtenerUnRegistro($sqlstr, $parameters);
+        return $registro;
+
+    }
+
+    static public function newUsuario($email, $username, $password)
     {
         if (!\Utilities\Validators::IsValidEmail($email)) {
             throw new Exception("Correo no es válido");
@@ -65,7 +75,7 @@ class Security extends \Dao\Table
         unset($newUser["userpswdchg"]);
 
         $newUser["useremail"] = $email;
-        $newUser["username"] = "John Doe";
+        $newUser["username"] = $username?$username:'User';
         $newUser["userpswd"] = $hashedPassword;
         $newUser["userpswdest"] = Estados::ACTIVO;
         $newUser["userpswdexp"] = date('Y-m-d', time() + 7776000);  //(3*30*24*60*60) (m d h mi s)
@@ -84,6 +94,56 @@ class Security extends \Dao\Table
         return self::executeNonQuery($sqlIns, $newUser);
 
     }
+
+
+     public static function updateUserClient($useremail, $username, $userpswd, $usercod)
+    {
+        if (!\Utilities\Validators::IsValidEmail($useremail)) {
+            throw new Exception("Correo no es válido");
+        }
+        if (!\Utilities\Validators::IsValidPassword($userpswd)) {
+            throw new Exception("Contraseña debe ser almenos 8 caracteres, 1 número, 1 mayúscula, 1 símbolo especial");
+        }
+
+        $hashedPassword = self::_hashPassword($userpswd);
+
+        $updSQL = "UPDATE `usuario` set `useremail`=:useremail, `username`=:username, `userpswd`=:userpswd where `usercod`=:usercod;";
+        $parameters = array(
+            'useremail' => $useremail,
+            'username' => $username,
+            'userpswd' => $hashedPassword,
+            'usercod' => $usercod
+        );
+
+        return self::executeNonQuery($updSQL, $parameters);
+    }
+
+    public static function updateNoPass($useremail, $username, $usercod)
+    {
+        if (!\Utilities\Validators::IsValidEmail($useremail)) {
+            throw new Exception("Correo no es válido");
+        }
+
+        $updSQL = "UPDATE `usuario` set `useremail`=:useremail, `username`=:username where `usercod`=:usercod;";
+        $parameters = array(
+            'useremail' => $useremail,
+            'username' => $username,
+            'usercod' => $usercod
+        );
+
+        return self::executeNonQuery($updSQL, $parameters);
+    }
+
+    public static function deleteUser($usercod)
+    {
+        $delSQL = "DELETE FROM `usuario`  where `usercod`=:usercod;";
+        $parameters = array(
+            'usercod' => $usercod
+        );
+
+        return self::executeNonQuery($delSQL, $parameters);
+    }
+
 
     static public function getUsuarioByEmail($email)
     {

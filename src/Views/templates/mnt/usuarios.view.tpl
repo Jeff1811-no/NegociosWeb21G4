@@ -13,7 +13,7 @@
       {{endif Admin}}
       <th>
         {{if CanInsert}}
-        <a href="index.php?page=mnt_usuario&mode=INS&id=0">Nuevo</a>
+        <a href="index.php?page=mnt_usuario&mode=INS">Nuevo</a>
         {{endif CanInsert}}
       </th>
       </tr>
@@ -24,7 +24,7 @@
         <td>{{usercod}}</td>
         <td>
           {{if CanView}}
-            <a href="index.php?page=mnt_usuario&mode=DSO&id={{usercod}}">{{useremail}}</a>
+             <a href="index.php?page=mnt_usuario&mode=DSP&id={{usercod}}">{{useremail}}</a>
           {{endif CanView}}
 
           {{ifnot CanView}}

@@ -28,7 +28,7 @@
     <nav>
       <ul>
         {{with login}}
-          <li><span>{{userName}}</span></li>
+          <li><a href="index.php?page=mnt_editarusuario&mode=UPD&id={{userId}}">{{userName}}</a></li>
         {{endwith login}}
         <li><a href="index.php?page=retails_carrito">Carrito</a></li>
         <li><a href="index.php">Inicio</a></li>
