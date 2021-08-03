@@ -91,7 +91,8 @@ class Security extends \Dao\Table
             now(), :userpswdest, :userpswdexp, :userest, :useractcod,
             now(), :usertipo);";
 
-        return self::executeNonQuery($sqlIns, $newUser);
+        self::executeNonQuery($sqlIns, $newUser);
+        return self::getLastId();
 
     }
 

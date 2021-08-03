@@ -70,7 +70,10 @@ class ProductosPanel extends Table{
             'ProdId' => $ProdId
         );
 
-        return self::executeNonQuery($delSQL, $parameters);
+        self::executeNonQuery($delSQL, $parameters);
+        $lastId = self::getLastId();
+        $actSQL = "ALTER TABLE `productos` AUTO_INCREMENT = $lastId";
+        return self::executeNonQuery($actSQL,array());
     }
 
 }

@@ -1,21 +1,21 @@
-
+<script src='/{{BASE_DIR}}/public/js/imagen.js'></script>
 <section class="container-m row depth-1 px-4 py-4">
   <h1>{{ModalTitle}}</h1>
 </section>
 <section class="container-m row depth-1 px-4 py-4">
-  <form action="index.php?page=mnt_producto" method="POST" class="col-12 col-m-8 offset-m-2">
-    <div class="row my-2 align-center">
-      <label class="col-12 col-m-3"for="ProdIMG">Imagen</label>
-      
-      <div class="col-12 col-m-9">
-        <form action="upload.php" method="POST" enctype="multipart/form-data">
-          <img src="/{{BASE_DIR}}{{ProdIMG}}"  style="max-width:250px" id="impp"class="img-thumbnail">
-            <input id ="file" type="file" name="prod"/>
-            <button type="submit" name="submit">Aceptar</button>
+    <div class="col-12 col-m-8 offset-m-2">
+     <div class="row my-2 align-center">
+        <label class="col-12 col-m-3"for="ProdIMG">Imagen</label>
+        <form id="frmI" method="POST" enctype="multipart/form-data" class="col-12 col-m-9">
+          <div class="container" >
+            <input id="uploadImage" type="file" name="Imagen" /><br/>
+            <img src="/{{BASE_DIR}}{{ProdIMG}}" class="imagen" style="width:60%"><br/>
+            <input class="btn btn-success" type="submit" value="Upload">
+          </div>
         </form>
-      </div>
-      
+     </div>
     </div>
+  <form action="index.php?page=mnt_producto" method="POST" class="col-12 col-m-8 offset-m-2">
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="ProdIdd">Código</label>
       <input class="col-12 col-m-9" readonly disabled type="text" name="ProdIdd" id="ProdIdd" placehoder="Código" value="{{ProdId}}"/>
@@ -52,7 +52,7 @@
     </div>
       <div class="row my-4 align-center flex-end">
         {{if showCommitBtn}}
-        <button class="primary col-12 col-m-2" type="submit" name="btnConfirmar">Confirmar</button>
+        <button class="primary col-12 col-m-2" type="submit" value="Confirmar" name="btnConfirmar">Confirmar</button>
         &nbsp;
         {{endif showCommitBtn}}
         <button class="col-12 col-m-2"type="button" id="btnCancelar">
@@ -76,8 +76,11 @@
       e.stopPropagation();
       window.location.assign("index.php?page=mnt_productos");
     });
+    var form = document.getElementById("frmI");
+    form.addEventListener("submit", (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      imagen({{ProdId}});
+    });
   });
-  
-}
-
 </script>

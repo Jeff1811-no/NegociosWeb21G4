@@ -103,10 +103,6 @@ abstract class Table
         foreach ($params as $key => &$value) {
             $query->bindParam(":" . $key, $value, self::getBindType($value));
         }
-        // if($query->execute()){
-        //     $lastId = $pConn->lastInsertId();
-        //     $query["lastId"] = $lastId;
-        // }
         return $query->execute();
     }
 
@@ -123,6 +119,17 @@ abstract class Table
         } else {
             return array();
         }
+    }
+
+    protected static function getLastId(&$conn = null)
+    {
+        $pConn = null;
+        if ($conn != null) {
+            $pConn = $conn;
+        } else {
+            $pConn = self::getConn();
+        }
+        return $pConn->lastInsertId();
     }
 }
 
