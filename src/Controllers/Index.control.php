@@ -37,29 +37,7 @@ class Index extends PublicController
         */
         $viewData = array();
         $viewData["page"] = $this->toString();
-    
-     
-        $tmpProductos = \Dao\ProductosPanel::getLastProductos();
-        $viewData["Productos"] = array();
-        
-        foreach ($tmpProductos as $productos) {
-    
-            $productos["ProdIMG"]="";   
-           
-                
-                $file = file_exists("uploads/productos/".$productos['ProdId'].".jpeg") ? $productos['ProdId'].".jpeg" :
-                (file_exists("uploads/productos/".$productos['ProdId'].".jpg") ? $productos['ProdId'].".jpg" : 
-                (file_exists("uploads/productos/".$productos['ProdId'].".png") ? $productos['ProdId'].".png" : 
-                (file_exists("uploads/productos/".$productos['ProdId'].".gif") ? $productos['ProdId'].".gif" : "default.jpg")));
-                $productos["ProdIMG"]="NegociosWeb21G4/uploads/productos/$file";
-
-                
-            
-            $viewData["productos"][] = $productos;
-          
-        }
-
-
+        $viewData["items"] = \Dao\ProductosPanel::getAllProductos();
         \Views\Renderer::render("index", $viewData);
     }
 }

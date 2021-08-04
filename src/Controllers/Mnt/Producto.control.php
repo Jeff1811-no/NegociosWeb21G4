@@ -58,9 +58,6 @@ class Producto extends \Controllers\PublicController
             }
             switch($viewData['mode']) {
             case 'INS':
-                if($viewData["ProdNombre"]!="" && $viewData["ProdDescripcion"]!=""&&$viewData["ProdPrecioVenta"]!=""&&
-                $viewData["ProdPrecioCompra"]!=""&& $viewData["ProdStock"]!=""&& $viewData["ProdEst"]!=""
-                ){
                 $ok = \Dao\ProductosPanel::addProducto(
                     $viewData["ProdNombre"],
                     $viewData["ProdDescripcion"],
@@ -76,11 +73,6 @@ class Producto extends \Controllers\PublicController
                         'ProductosPanel agregado Exitosamente'
                     );
                 }
-            }else{
-                \Utilities\Site::redirectToWithMsg(
-                    'index.php?page=mnt_productos',
-                    'Información Incompleta');
-            }
                 break;
             case 'UPD':
                 $ok = \Dao\ProductosPanel::updateProducto(
@@ -121,22 +113,6 @@ class Producto extends \Controllers\PublicController
         }
         if ($viewData['mode'] == 'INS') {
             $viewData['ModalTitle'] = 'Agregando nuevo ProductosPanel';
-            $Lid=\Dao\ProductosPanel::getLastProducto();
-            $viewData["ProdId"]=($Lid[0]["MAX(ProdId)"]+1);
-            $idprod=$Lid[0]["MAX(ProdId)"]+1;
-              
-                if (file_exists("uploads/productos/".$idprod.".jpeg")) {
-                    unlink("uploads/productos/".$idprod.".jpeg");
-                }
-                elseif(file_exists("uploads/productos/".$idprod.".jpg")){
-                    unlink("uploads/productos/".$idprod.".jpg");
-                }elseif (file_exists("uploads/productos/".$idprod.".png")) {
-                    unlink("uploads/productos/".$idprod.".png");
-                }
-                elseif (file_exists("uploads/productos/".$idprod.".gif")) {
-                    unlink("uploads/productos/".$idprod.".gif");
-                }
-
         } else {
 
             $ProdId = \Dao\ProductosPanel::getProductoById($viewData['ProdId']);
