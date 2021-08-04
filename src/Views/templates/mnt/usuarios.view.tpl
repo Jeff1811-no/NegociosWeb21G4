@@ -1,6 +1,18 @@
 <section class="depth-1">
   <h1>Trabajar con Usuarios</h1>
 </section>
+
+{{if Admin}}
+
+<a></a>
+<a></a>
+
+<button id="roles" data-href="index.php?page=admin_roles">Roles</button>
+<button data-href="index.php?page=admin_funcionesroles">Funciones Roles</button>
+
+
+{{endif Admin}}
+
 <section class="WWList">
   <table >
     <thead>
@@ -55,3 +67,13 @@
     </tbody>
   </table>
 </section>
+
+
+
+<script>
+$("roles").click(function(){
+  var roles = "index.php?page=admin_roles";
+  document.location.href = roles;
+});
+
+</script>
