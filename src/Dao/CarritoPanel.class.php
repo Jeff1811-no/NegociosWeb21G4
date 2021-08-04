@@ -11,13 +11,14 @@ class CarritoPanel extends Table{
     
     */
 
-
     public static function getCarritoById($id)
     {
-        $sqlstr = "SELECT * from carritousuario WHERE usuario=:id;";
-        $parameters = array("id" => $id);
-        $registro = self::obtenerUnRegistro($sqlstr, $parameters);
-        return $registro;
+        $registros = array();
+        $registros = self::obtenerRegistros(
+            "SELECT * from carritousuario WHERE usuario=:id;",
+            array("id" => $id)
+        );
+        return $registros;
 
     }
 
@@ -32,6 +33,18 @@ class CarritoPanel extends Table{
         );
 
         return self::executeNonQuery($insSQL, $parameters);
+    }
+
+    public static function updateCarritoProducto($usuario, $producto, $cantidad,)
+    {
+        $updSQL = "UPDATE `carritousuario` set `cantidad`=:cantidad where `usuario`=:usuario and `producto`=:producto;";
+        $parameters = array(
+            'cantidad' => $cantidad,
+            'usuario' => $usuario,
+            'producto' => $producto
+        );
+
+        return self::executeNonQuery($updSQL, $parameters);
     }
 
 
