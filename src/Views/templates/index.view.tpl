@@ -25,11 +25,12 @@
 </div>
 </section>
 <section>
-<div class="card-deck">
-  {{foreach items}}
-    <div class="col-4 mt-5">
+<div class="card-deck" id="tbldata">
+  {{foreach productos}}
+    <div class="col-4 mt-5" >
      <div class="card">
-        <img class="card-img-top" src="https://holatelcel.com/wp-content/uploads/2020/09/cheems-memes-9.jpg" alt="Card image cap">
+     <tr class="hidden"><td class="hidden">  </td></tr>
+        <img class="card-img-top" src="/{{ProdIMG}}"  alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{ProdNombre}}</h5>
           <p class="card-text">{{ProdDescripcion}}</p>
@@ -38,7 +39,7 @@
         </div>
     </div>  
     </div>
-  {{endfor items}}
+  {{endfor productos}}
   </div>
 </section>
 <script>
@@ -56,16 +57,7 @@
   });
 </script>
 
-<section>
-  Top 5 Pianos a la venta
-</section>
 
-<section>
-  Top 5 Partituras
-</section>
 
-<style>
-.card {}
-</style>
 
 
