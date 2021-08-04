@@ -32,6 +32,23 @@ class ProductosPanel extends Table{
 
     }
 
+    public static function getLastProductos()
+    {
+        $sqlstr = "SELECT * FROM productos ORDER BY  ProdId DESC LIMIT 5 ;";
+        $registros = array();
+        $registro = self::obtenerRegistros($sqlstr,array());
+        return $registro;
+
+    }
+    public static function getLastProducto()
+    {
+        $sqlstr = "SELECT MAX(ProdId) FROM  productos;";
+        $registros = array();
+        $registro = self::obtenerRegistros($sqlstr,array());
+        return $registro;
+
+    }
+
     public static function addProducto($ProdNombre, $ProdDescripcion, $ProdPrecioVenta, $ProdPrecioCompra, $ProdStock, $ProdEst)
     {
         $insSQL = "INSERT INTO `productos` (`ProdNombre`, `ProdDescripcion`, `ProdPrecioVenta`, `ProdPrecioCompra`, `ProdStock`, `ProdEst`) VALUES (:ProdNombre, :ProdDescripcion, :ProdPrecioVenta, :ProdPrecioCompra, :ProdStock, :ProdEst);";
@@ -77,6 +94,8 @@ class ProductosPanel extends Table{
     }
 
 }
+
+
 
 
 
