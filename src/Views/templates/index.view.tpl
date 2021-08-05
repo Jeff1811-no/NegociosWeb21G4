@@ -35,7 +35,11 @@
           <h5 class="card-title">{{ProdNombre}}</h5>
           <p class="card-text">{{ProdDescripcion}}</p>
           <p class="font-weight-light">{{ProdPrecioVenta}}</p>
-          <button data-href="index.php?page=retails_productodetalle&id={{ProdId}}" class="btn btn-primary id">Ver producto</button>
+          <form action="index.php?page=retails_productodetalle&id={{ProdId}}" method="post">
+            <input value="{{ProdId}}" name="ProdId" type="hidden" />
+            <button type="submit" data-href="index.php?page=retails_productodetalle&id={{ProdId}}" class="btn btn-primary id">Ver producto</button>
+          </form>
+          
         </div>
     </div>  
     </div>

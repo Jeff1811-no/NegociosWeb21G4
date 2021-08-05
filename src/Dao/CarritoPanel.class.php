@@ -22,6 +22,17 @@ class CarritoPanel extends Table{
 
     }
 
+    public static function getCarrito($id, $pro)
+    {
+        $registros = array();
+        $registros = self::obtenerRegistros(
+            "SELECT * from carritousuario WHERE usuario=:id AND producto=:pro",
+            array("id" => $id, "pro" => $pro)
+        );
+        return $registros;
+
+    }
+
     public static function addCarrito($usuario, $producto, $cantidad, $precio)
     {
         $insSQL = "INSERT INTO `carritousuario` (`usuario`, `producto`, `cantidad`, `precio`, `fechacompra`) VALUES ( :usuario, :producto, :cantidad, :precio, NOW());";
@@ -50,7 +61,7 @@ class CarritoPanel extends Table{
 
     public static function deleteCarritoProducto($usuario, $producto)
     {
-        $delSQL = "DELETE FROM `carritousuario` WHERE usuario=:usuario AND $producto;";
+        $delSQL = "DELETE FROM `carritousuario` WHERE usuario=:usuario AND producto=:producto;";
         $parameters = array(
             "usuario" => $usuario,
             "producto" => $producto

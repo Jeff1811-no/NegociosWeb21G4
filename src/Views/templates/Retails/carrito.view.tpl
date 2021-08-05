@@ -14,7 +14,7 @@
     <tbody>
       {{foreach carrito}}
         <tr>
-            <td><img src="/{{img}}"/></td>
+            <td><img class="img" src="/{{img}}"/></td>
             <td>{{dsc}}</td>
             <td>
                 <input value="{{precio}}" name="precio" type="hidden" id="precio" readonly />
@@ -23,7 +23,7 @@
             <td>
               <form action="index.php?page=retails_carrito" method="post">
                   <input value="{{producto}}" name="producto" type="hidden" />
-                  <input value="{{cantidad}}" name="cantidad" type="number" min="1" id="cantidad" onclick="totalb()" />
+                  <input value="{{cantidad}}" name="cantidad" type="number" min="1" id="cantidad" onclick="totalb()" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
               </form>
             </td>
             <td>
@@ -48,6 +48,14 @@
       <button type="submit" name="btnComprar" id="comprar" >Efectuar compra</button>
   </form>
 </section>
+
+<style>
+  .img{
+    width: 150px; 
+    height:150px; 
+    object-fit: cover;
+  }
+</style>
 
 <script>
 
@@ -76,6 +84,7 @@
     }
     txttotal.innerHTML = total;
   };
+
   var cantidades = document.getElementsByName("cantidad");
   for(var i = 0; i < cantidades.length; i++)
   {
@@ -88,5 +97,7 @@
     console.log(e.target.parentNode);
     e.target.parentNode.submit();
   }
+
+  
 
 </script>

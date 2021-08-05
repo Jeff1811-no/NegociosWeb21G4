@@ -11,7 +11,11 @@
     {{foreach productos}}
     <tr>
       <td>{{rownum}}</td>
-      <td><a href="index.php?page=mnt_producto&mode=DSP&id={{ProdId}}">{{ProdNombre}}</a></td><td class="hidden-s">{{ProdDescripcion}}</td><td class="hidden-s">{{ProdPrecioVenta}}</td><td class="hidden-s">{{ProdPrecioCompra}}</td><td class="hidden-s">{{ProdStock}}</td><td>{{ProdEst}}</td>
+      <td><a href="index.php?page=mnt_producto&mode=DSP&id={{ProdId}}">{{ProdNombre}}</a></td>
+      <td class="hidden-s">{{ProdDescripcion}}</td>
+      <td class="hidden-s">{{ProdPrecioVenta}}</td>
+      <td class="hidden-s">{{ProdPrecioCompra}}</td><td class="hidden-s">{{ProdStock}}</td>
+      <td>{{ProdEst}}</td>
       <td class="center">
         <a href="index.php?page=mnt_producto&mode=UPD&id={{ProdId}}">Editar</a>
         &nbsp;

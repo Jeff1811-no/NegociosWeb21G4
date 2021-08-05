@@ -9,7 +9,9 @@ class Carrito extends \Controllers\PrivateController {
         $viewData = array();
         $usuario = \Utilities\Security::getUserId();
         $tmpCarrito = \Dao\CarritoPanel::getCarritoById($usuario);
-
+        if (isset($_POST["cantidad"]) && isset($_POST["producto"])){
+            \Dao\CarritoPanel::updateCarritoProducto($usuario, $_POST["producto"], $_POST["cantidad"] );
+        }
         $viewData["carrito"] = array();
         foreach ($tmpCarrito as $carrito) {
 
@@ -21,11 +23,7 @@ class Carrito extends \Controllers\PrivateController {
             $carrito["img"]="NegociosWeb21G4/uploads/productos/$file";
 
             $tmpProducto = \Dao\ProductosPanel::getProductoById($carrito['producto']);
-            $carrito['dsc'] = "";
-            foreach($tmpProducto as $producto)
-            {
-                $carrito['dsc'] .= $producto['ProdDescripcion']." " ;
-            }
+            $carrito['dsc'] = $tmpProducto['ProdDescripcion'];
 
             $viewData["carrito"][] = $carrito;
             
@@ -35,12 +33,8 @@ class Carrito extends \Controllers\PrivateController {
             $producto = $_POST["producto"];
             \Dao\CarritoPanel::deleteCarritoProducto($usuario, $producto);
             \Utilities\Site::redirectToWithMsg(
-                "index.php?page=mnt_carrito",
+                "index.php?page=retails_carrito",
                 "Se elimino del carrito");
-        }
-
-        if (isset($_POST["cantidad"]) && isset($_POST["producto"])){
-            \Dao\CarritoPanel::updateCarritoProducto($usuario, $_POST["producto"], $_POST["cantidad"] );
         }
         
     
