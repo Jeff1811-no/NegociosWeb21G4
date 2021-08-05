@@ -18,13 +18,10 @@
 <label class="col-12 col-m-3" for="fecha_accion">fecha_accion</label>
 <input class="col-12 col-m-9"{{readonly}} type="text" name="fecha_accion" id="fecha_accion" placehoder="fecha_accion" value="{{fecha_accion}}" />
 </div>
-    <div class="row my-2 align-center">
-      <label class="col-12 col-m-3" for="descripcion">Estado</label>
-      <select name="descripcion"" id="descripcion" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
-        <option value="ACT" {{if descripcion_act}}selected{{endif descripcion_act}}>Mostrar</option>
-        <option value="INA" {{if descripcion_ina}}selected{{endif descripcion_ina}}>Ocultar</option>
-      </select>
-    </div>
+<div class="row my-2 align-center">
+<label class="col-12 col-m-3" for="descripcion">Descripción</label>
+<textarea class="col-12 col-m-9"{{readonly}} type="text" name="descripcion" id="descripcion" placehoder="descripcion">{{descripcion}}</textarea>
+</div>
     <div class="row my-4 align-center flex-end">
       {{if showCommitBtn}}
       <button class="primary col-12 col-m-2" type="submit" name="btnConfirmar">Confirmar</button>

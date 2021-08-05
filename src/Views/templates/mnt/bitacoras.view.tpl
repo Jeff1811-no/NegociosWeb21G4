@@ -3,8 +3,7 @@
 <table>
   <thead>
     <tr>
-          <th>#</th><th class="hidden-s">accion</th><th class="hidden-s">fecha_accion</th><th>descripcion</th>
-          <th><a href="index.php?page=mnt_bitacora&mode=INS" class="button">+</a></th>
+          <th>#</th><th class="hidden-s">Acción</th><th class="hidden-s">Fecha</th><th>Descripción</th>
     </tr>
   </thead>
   <tbody>
@@ -12,11 +11,6 @@
     <tr>
       <td>{{rownum}}</td>
       <td><a href="index.php?page=mnt_bitacora&mode=DSP&id={{idbitacora}}">{{accion}}</a></td><td class="hidden-s">{{fecha_accion}}</td><td>{{descripcion}}</td>
-      <td class="center">
-        <a href="index.php?page=mnt_bitacora&mode=UPD&id={{idbitacora}}">Editar</a>
-        &nbsp;
-        <a href="index.php?page=mnt_bitacora&mode=DEL&id={{idbitacora}}"">Eliminar</a>
-      </td>
     </tr>
     {{endfor bitacoras}}
 

@@ -7,7 +7,7 @@ class BitacorasPanel extends Table{
     {
         $registros = array();
         $registros = self::obtenerRegistros(
-            "SELECT * from bitacoras where descripcion='ACT';",
+            "SELECT * from bitacora where descripcion='ACT';",
             array()
         );
         return $registros;
@@ -17,7 +17,7 @@ class BitacorasPanel extends Table{
     {
         $registros = array();
         $registros = self::obtenerRegistros(
-            "SELECT * from bitacoras;",
+            "SELECT * from bitacora;",
             array()
         );
         return $registros;
@@ -25,7 +25,7 @@ class BitacorasPanel extends Table{
 
     public static function getBitacoraById($id)
     {
-        $sqlstr = "SELECT * from bitacoras where idbitacora=:id;";
+        $sqlstr = "SELECT * from bitacora where idbitacora=:id;";
         $parameters = array("id" => $id);
         $registro = self::obtenerUnRegistro($sqlstr, $parameters);
         return $registro;
@@ -34,7 +34,7 @@ class BitacorasPanel extends Table{
 
     public static function addBitacora($accion, $fecha_accion, $descripcion)
     {
-        $insSQL = "INSERT INTO `bitacoras` (`accion`, `fecha_accion`, `descripcion`) VALUES (:accion, :fecha_accion, :descripcion);";
+        $insSQL = "INSERT INTO `bitacora` (`accion`, `fecha_accion`, `descripcion`) VALUES (:accion, :fecha_accion, :descripcion);";
         $parameters = array(
             'accion' => $accion,
 'fecha_accion' => $fecha_accion,
@@ -46,7 +46,7 @@ class BitacorasPanel extends Table{
 
     public static function updateBitacora($accion, $fecha_accion, $descripcion, $idbitacora)
     {
-        $updSQL = "UPDATE `bitacoras` set `accion`=:accion, `fecha_accion`=:fecha_accion, `descripcion`=:descripcion where `idbitacora`=:idbitacora;";
+        $updSQL = "UPDATE `bitacora` set `accion`=:accion, `fecha_accion`=:fecha_accion, `descripcion`=:descripcion where `idbitacora`=:idbitacora;";
         $parameters = array(
            'accion' => $accion,
 'fecha_accion' => $fecha_accion,
@@ -59,7 +59,7 @@ class BitacorasPanel extends Table{
 
     public static function deleteBitacora($idbitacora)
     {
-        $delSQL = "DELETE FROM `bitacoras`  where `idbitacora`=:idbitacora;";
+        $delSQL = "DELETE FROM `bitacora`  where `idbitacora`=:idbitacora;";
         $parameters = array(
             'idbitacora' => $idbitacora
         );
