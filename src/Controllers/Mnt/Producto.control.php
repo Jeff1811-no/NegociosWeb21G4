@@ -25,6 +25,7 @@ class Producto extends \Controllers\PublicController
         $viewData["ProdStock"] = "";
         $viewData["ProdEst"] = 'ACT';
         $viewData["ProdIMG"]="";
+        $viewData["ProdInsert"] = false;
         $viewData['readonly'] = '';
         $viewData['showCommitBtn'] = true;
         $viewData['ProdEst_act'] = true;
@@ -59,45 +60,53 @@ class Producto extends \Controllers\PublicController
             switch($viewData['mode']) {
             case 'INS':
                 if($viewData["ProdNombre"]!="" && $viewData["ProdDescripcion"]!=""&&$viewData["ProdPrecioVenta"]!=""&&
-                $viewData["ProdPrecioCompra"]!=""&& $viewData["ProdStock"]!=""&& $viewData["ProdEst"]!=""
-                ){
-                $ok = \Dao\ProductosPanel::addProducto(
-                    $viewData["ProdNombre"],
-                    $viewData["ProdDescripcion"],
-                    $viewData["ProdPrecioVenta"],
-                    $viewData["ProdPrecioCompra"],
-                    $viewData["ProdStock"],
-                    $viewData["ProdEst"]
+                $viewData["ProdPrecioCompra"]!=""&& $viewData["ProdStock"]!=""&& $viewData["ProdEst"]!="")
+                {
+                    $ok = \Dao\ProductosPanel::addProducto(
+                        $viewData["ProdNombre"],
+                        $viewData["ProdDescripcion"],
+                        $viewData["ProdPrecioVenta"],
+                        $viewData["ProdPrecioCompra"],
+                        $viewData["ProdStock"],
+                        $viewData["ProdEst"]
 
-                );
-                if ($ok) {
+                    );
+                    if ($ok) {
+                        \Utilities\Site::redirectToWithMsg(
+                            'index.php?page=mnt_productos',
+                            'ProductosPanel agregado Exitosamente'
+                        );
+                    }
+                }else{
                     \Utilities\Site::redirectToWithMsg(
                         'index.php?page=mnt_productos',
-                        'ProductosPanel agregado Exitosamente'
-                    );
+                        'Información Incompleta');
                 }
-            }else{
-                \Utilities\Site::redirectToWithMsg(
-                    'index.php?page=mnt_productos',
-                    'Información Incompleta');
-            }
                 break;
             case 'UPD':
-                $ok = \Dao\ProductosPanel::updateProducto(
-                    $viewData["ProdNombre"],
-                    $viewData["ProdDescripcion"],
-                    $viewData["ProdPrecioVenta"],
-                    $viewData["ProdPrecioCompra"],
-                    $viewData["ProdStock"],
-                    $viewData["ProdEst"],
-                    $viewData["ProdId"]
+                if($viewData["ProdNombre"]!="" && $viewData["ProdDescripcion"]!=""&&$viewData["ProdPrecioVenta"]!=""&&
+                $viewData["ProdPrecioCompra"]!=""&& $viewData["ProdStock"]!=""&& $viewData["ProdEst"]!="")
+                {
+                    $ok = \Dao\ProductosPanel::updateProducto(
+                        $viewData["ProdNombre"],
+                        $viewData["ProdDescripcion"],
+                        $viewData["ProdPrecioVenta"],
+                        $viewData["ProdPrecioCompra"],
+                        $viewData["ProdStock"],
+                        $viewData["ProdEst"],
+                        $viewData["ProdId"]
 
-                );
-                if ($ok) {
-                    \Utilities\Site::redirectToWithMsg(
-                        'index.php?page=mnt_productos',
-                        'ProductosPanel actualizado Exitosamente'
                     );
+                    if ($ok) {
+                        \Utilities\Site::redirectToWithMsg(
+                            'index.php?page=mnt_productos',
+                            'ProductosPanel actualizado Exitosamente'
+                        );
+                    }
+                }else{
+                    \Utilities\Site::redirectToWithMsg(
+                        'index.php?page=mnt_producto&mode=UPD&id='.$_POST["ProdId"],
+                        'LLene todos los campos');
                 }
                 break;
             case 'DEL':
@@ -121,6 +130,7 @@ class Producto extends \Controllers\PublicController
         }
         if ($viewData['mode'] == 'INS') {
             $viewData['ModalTitle'] = 'Agregando nuevo ProductosPanel';
+            $viewData["ProdInsert"] = true;
             $Lid=\Dao\ProductosPanel::getLastProducto();
             $viewData["ProdId"]=($Lid[0]["MAX(ProdId)"]+1);
             $idprod=$Lid[0]["MAX(ProdId)"]+1;
@@ -140,7 +150,7 @@ class Producto extends \Controllers\PublicController
         } else {
 
             $ProdId = \Dao\ProductosPanel::getProductoById($viewData['ProdId']);
-            
+            $viewData["ProdInsert"] = true;
             error_log(json_encode($ProdId));
             if (!$ProdId) {
                 \Utilities\Site::redirectToWithMsg(
@@ -160,6 +170,7 @@ class Producto extends \Controllers\PublicController
             $viewData['ProdEst_ina'] = $viewData['ProdEst'] == 'INA';
 
             if ($viewData['mode'] == 'DEL' || $viewData['mode'] == 'DSP') {
+                $viewData["ProdInsert"] = false;
                 $viewData['readonly'] = 'readonly';
                 $viewData['showCommitBtn']  = $viewData['mode'] == 'DEL';
             }

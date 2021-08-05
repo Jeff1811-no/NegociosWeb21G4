@@ -1,6 +1,6 @@
 <?php
 
-namespace Controllers\Mnt;
+namespace Controllers\Admin;
 
 class Bitacoras extends \Controllers\PublicController {
 
@@ -15,11 +15,7 @@ class Bitacoras extends \Controllers\PublicController {
             $bitacoras["rownum"] = $counter;
             $viewData["bitacoras"][] = $bitacoras;
         }
-        $time = time();
-        $token = md5(bitacoras. $time);
-        $_SESSION["bitacoras_xss_token"] = $token;
-        $_SESSION["bitacoras_xss_token_tts"] = $time;
-        \Views\Renderer::render("mnt/bitacoras", $viewData);
+        \Views\Renderer::render("admin/bitacoras", $viewData);
     }
 }
 

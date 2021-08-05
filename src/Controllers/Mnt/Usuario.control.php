@@ -64,45 +64,58 @@ class Usuario extends \Controllers\PrivateController
          
             switch($viewData['mode']) {
             case 'INS':
-                $ok = \Dao\Security\Security::newUsuario(
-                    $viewData["useremail"],
-                    $viewData["username"],
-                    $viewData["userpswd"],
-
-                );
-                if ($ok) {
-                    $u = \Dao\Security\Security::getUsuarioByEmail($viewData["useremail"]);
-                    if(\Dao\RolesUsuariosPanel::addRolUsuario($u["usercod"],"PUBLIC","ACT")){
-                        \Utilities\Site::redirectToWithMsg(
-                            'index.php?page=mnt_usuarios',
-                            'UsersPanel agregado Exitosamente'
-                        );
-                    }
-                }
-                break;
-            case 'UPD':
-                $p = \Dao\Security\Security::getUserById($viewData['usercod']);
-                if($viewData['userpswd']){
-                    $ok = \Dao\Security\Security::updateUserClient(
+                if($viewData["useremail"]!="" && $viewData["userpswd"]!=""){
+                    $ok = \Dao\Security\Security::newUsuario(
                         $viewData["useremail"],
                         $viewData["username"],
                         $viewData["userpswd"],
-                        $viewData["usercod"]
+    
                     );
-                }else{
-                    $ok = \Dao\Security\Security::updateNoPass(
-                        $viewData["useremail"],
-                        $viewData["username"],
-                        $viewData["usercod"]
-                    );
+                    if ($ok) {
+                        $u = \Dao\Security\Security::getUsuarioByEmail($viewData["useremail"]);
+                        if(\Dao\RolesUsuariosPanel::addRolUsuario($u["usercod"],"PUBLIC","ACT")){
+                            \Utilities\Site::redirectToWithMsg(
+                                'index.php?page=mnt_usuarios',
+                                'UsersPanel agregado Exitosamente'
+                            );
+                        }
+                    }
                 }
-                if ($ok) {
-                    if(\Dao\RolesUsuariosPanel::updateRolUsuario($viewData["rolescod"],"ACT",$viewData["usercod"])){
-                        \Utilities\Site::redirectToWithMsg(
-                            'index.php?page=mnt_usuarios',
-                            'UsersPanel actualizado Exitosamente'
+                else{
+                    \Utilities\Site::redirectToWithMsg(
+                        'index.php?page=mnt_usuarios',
+                        'Información Incompleta');
+                }
+                break;
+            case 'UPD':
+                if($viewData['useremail'] != ""){
+                    if($viewData['userpswd']){
+                        $ok = \Dao\Security\Security::updateUserClient(
+                            $viewData["useremail"],
+                            $viewData["username"],
+                            $viewData["userpswd"],
+                            $viewData["usercod"]
+                        );
+                    }else{
+                        $ok = \Dao\Security\Security::updateNoPass(
+                            $viewData["useremail"],
+                            $viewData["username"],
+                            $viewData["usercod"]
                         );
                     }
+                    if ($ok) {
+                        if(\Dao\RolesUsuariosPanel::updateRolUsuario($viewData["rolescod"],"ACT",$viewData["usercod"])){
+                            \Utilities\Site::redirectToWithMsg(
+                                'index.php?page=mnt_usuarios',
+                                'UsersPanel actualizado Exitosamente'
+                            );
+                        }
+                    }
+
+                }else{
+                    \Utilities\Site::redirectToWithMsg(
+                        'index.php?page=mnt_usuarios',
+                        'No ingreso un correo valido');
                 }
                 break;
             case 'DEL':

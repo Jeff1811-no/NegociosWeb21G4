@@ -128,7 +128,7 @@ class Security extends \Dao\Table
         $updSQL = "UPDATE `usuario` set `useremail`=:useremail, `username`=:username where `usercod`=:usercod;";
         $parameters = array(
             'useremail' => $useremail,
-            'username' => $username,
+            'username' => $username?$username:'User',
             'usercod' => $usercod
         );
 

@@ -23,26 +23,51 @@ class ProductoDetalle extends \Controllers\PublicController {
                 'No existe el registro'
             );
         }
+        
         if(isset($_POST["btnAgregarCarrito"])){
-            $tmp = \Dao\CarritoPanel::getCarrito($usuario,$_POST["ProdId"]);
-            if($tmp){
-                $unidades = $tmp[0]["cantidad"] + $_POST["ProdStock"];
-                if(\Dao\CarritoPanel::updateCarritoProducto($usuario,$_POST["ProdId"],$unidades)){
+            if(\Utilities\Security::isLogged()){
+                if($_POST['ProdStock'] != 0){
+                    $tmp = \Dao\CarritoPanel::getCarrito($usuario,$_POST["ProdId"]);
+                    if($tmp){
+                        $unidades = $tmp[0]["cantidad"] + $_POST["ProdStock"];
+                        if(\Dao\CarritoPanel::updateCarritoProducto($usuario,$_POST["ProdId"],$unidades)){
+                            $p = \Dao\ProductosPanel::getProductoById($_POST["ProdId"]);
+                            $s = $p["ProdStock"] - $_POST["ProdStock"];
+                           if( \Dao\ProductosPanel::updateProductoStock($s, $_POST["ProdId"])){
+                                \Utilities\Site::redirectToWithMsg(
+                                    'index.php?page=Retails_productodetalle&id='.$_POST["ProdId"],
+                                    'Se actualizo el carrito'
+                                );
+                            }
+                        }
+                    }else{
+                        if(\Dao\CarritoPanel::addCarrito($usuario, $_POST["ProdId"] ,$_POST["ProdStock"], $_POST["ProdPrecioVenta"]))
+                        {
+                            $p = \Dao\ProductosPanel::getProductoById($_POST["ProdId"]);
+                            $s = $p["ProdStock"] - $_POST["ProdStock"];
+                            \Dao\ProductosPanel::updateProductoStock($s, $_POST["ProdId"]);
+                            \Utilities\Site::redirectToWithMsg(
+                                'index.php?page=Retails_productodetalle&id='.$_POST["ProdId"],
+                                'Agregado al carrito'
+                            );
+                        }
+                    }
+
+                }else{
                     \Utilities\Site::redirectToWithMsg(
-                        'index.php?page=Retails_productodetalle&id='.$_POST["ProdId"],
-                        'Se actualizo el carrito'
+                        'index.php',
+                        'Ya no hay existencia de este producto'
                     );
                 }
             }else{
-                if(\Dao\CarritoPanel::addCarrito($usuario, $_POST["ProdId"] ,$_POST["ProdStock"], $_POST["ProdPrecioVenta"]))
-                {
-                    \Utilities\Site::redirectToWithMsg(
-                        'index.php?page=Retails_productodetalle&id='.$_POST["ProdId"],
-                        'Agregado al carrito'
-                    );
-                }
+                \Utilities\Site::redirectToWithMsg(
+                    'index.php?page=sec_login',
+                    'Inicia Sesion para poder agregar datos al carrito'
+                );
             }
         }
+        
+        
         
         \Views\Renderer::render("retails/productodetalle", $tmpProducto);
     }

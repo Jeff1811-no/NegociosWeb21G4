@@ -8,9 +8,11 @@
         <label class="col-12 col-m-3"for="ProdIMG">Imagen</label>
         <form id="frmI" method="POST" enctype="multipart/form-data" class="col-12 col-m-9">
           <div class="container" >
-            <input id="uploadImage" type="file" name="Imagen" /><br/>
             <img src="/{{BASE_DIR}}{{ProdIMG}}" class="imagen" style="width:60%"><br/>
+            {{if ProdInsert}}
+            <input class="col-12 col-m-8" id="uploadImage" type="file" name="Imagen" />
             <input class="btn btn-success" type="submit" value="Upload">
+            {{endif ProdInsert}}
           </div>
         </form>
      </div>

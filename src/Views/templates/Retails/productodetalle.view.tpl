@@ -26,7 +26,7 @@
             
                     <form method="POST" action="index.php?page=Retails_productodetalle&ProdId={{ProdId}}">
                         <label class="font-weight-bold mb-2" for="ProdPrecioVenta">Precio</label>
-                        <h4 class="mb-2">Lps {{ProdPrecioVenta}}</h4>
+                        <h4 class="mb-2">$ {{ProdPrecioVenta}}</h4>
                         <input value="{{ProdId}}" name="ProdId" type="hidden" />
                         <input value="{{ProdPrecioVenta}}" name="ProdPrecioVenta" type="hidden" />
                         <label class="font-weight-bold mb-2" for="ProdStock">Cantidad</label>

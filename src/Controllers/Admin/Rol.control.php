@@ -50,30 +50,44 @@ class Rol extends \Controllers\PrivateController
             }
             switch($viewData['mode']) {
             case 'INS':
-                $ok = \Dao\RolesPanel::addRol(
-                    $viewData["rolescod"],
-                    $viewData["rolesdsc"],
-                    $viewData["rolesest"]
+                if($viewData["rolescod"] != "" && $viewData["rolesdsc"] !=""){
+                    $ok = \Dao\RolesPanel::addRol(
+                        $viewData["rolescod"],
+                        $viewData["rolesdsc"],
+                        $viewData["rolesest"]
 
-                );
-                if ($ok) {
+                    );
+                    if ($ok) {
+                        \Utilities\Site::redirectToWithMsg(
+                            'index.php?page=admin_roles',
+                            'RolesPanel agregado Exitosamente'
+                        );
+                    }
+                } else{
                     \Utilities\Site::redirectToWithMsg(
                         'index.php?page=admin_roles',
-                        'RolesPanel agregado Exitosamente'
+                        'Llene todos los campos'
                     );
                 }
                 break;
             case 'UPD':
-                $ok = \Dao\RolesPanel::updateRol(
-                    $viewData["rolesdsc"],
-                    $viewData["rolesest"],
-                    $viewData["rolescod"]
+                if($viewData["rolescod"] != "" && $viewData["rolesdsc"] !=""){
+                    $ok = \Dao\RolesPanel::updateRol(
+                        $viewData["rolesdsc"],
+                        $viewData["rolesest"],
+                        $viewData["rolescod"]
 
-                );
-                if ($ok) {
+                    );
+                    if ($ok) {
+                        \Utilities\Site::redirectToWithMsg(
+                            'index.php?page=admin_roles',
+                            'RolesPanel actualizado Exitosamente'
+                        );
+                    }
+                } else{
                     \Utilities\Site::redirectToWithMsg(
                         'index.php?page=admin_roles',
-                        'RolesPanel actualizado Exitosamente'
+                        'Llene todos los campos'
                     );
                 }
                 break;

@@ -197,7 +197,7 @@ class """+singular_name+""" extends \Controllers\PublicController
             $this->verificarToken();
             if ($viewData['token'] != $_SESSION['"""+lowerPlural+"""_xss_token']) {
                 $time = time();
-              $token = md5("""+lowerPlural+""" . $time);
+                $token = md5("""+comillas+lowerPlural+comillas+""" . $time);
                 $_SESSION['"""+lowerPlural+"""_xss_token'] = $token;
                 $_SESSION['"""+lowerPlural+"""_xss_token_tts'] = $time;
                 """+slash+"""Utilities\Site::redirectToWithMsg(
@@ -325,7 +325,7 @@ class """+plural_name+""" extends \Controllers\PublicController {
     {
         $viewData = array();
         $tmp"""+plural_name+""" = \Dao"""+slash+dao_name+"""::getAll"""+plural_name+"""();
-        $viewData["""+comillas+plural_name+comillas+"""] = array();
+        $viewData["""+comillas+lowerPlural+comillas+"""] = array();
         $counter = 0;
         foreach ($tmp"""+plural_name+""" as $"""+lowerPlural+""") {
             $counter ++;
@@ -333,7 +333,7 @@ class """+plural_name+""" extends \Controllers\PublicController {
             $viewData["""+comillas+lowerPlural+comillas+"""][] = $"""+lowerPlural+""";
         }
         $time = time();
-        $token = md5("""+lowerPlural+""". $time);
+        $token = md5("""+comillas+lowerPlural+comillas+""". $time);
         $_SESSION["""+comillas+lowerPlural+"""_xss_token"] = $token;
         $_SESSION["""+comillas+lowerPlural+"""_xss_token_tts"] = $time;
         \Views\Renderer::render("mnt/"""+lowerPlural+comillas+""", $viewData);
@@ -369,7 +369,7 @@ contenido = """<h1>Listado de """+dao_name+"""</h1>
       <td class="center">
         <a href="index.php?page=mnt_"""+lowerSingular+"""&mode=UPD&id="""+abrellave+abrellave+table_data[0]+cierrallave+cierrallave+comillas+""">Editar</a>
         &nbsp;
-        <a href="index.php?page=mnt_"""+lowerSingular+"""&mode=DEL&id="""+abrellave+abrellave+table_data[0]+cierrallave+cierrallave+comillas+"""">Eliminar</a>
+        <a href="index.php?page=mnt_"""+lowerSingular+"""&mode=DEL&id="""+abrellave+abrellave+table_data[0]+cierrallave+cierrallave+comillas+""">Eliminar</a>
       </td>
     </tr>
     {{endfor """+lowerPlural+"""}}
@@ -394,7 +394,7 @@ contenido = """
   <form action="index.php?page=mnt_"""+lowerSingular+"""" method="POST" class="col-12 col-m-8 offset-m-2">
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="""+comillas+table_data[0]+"d"+comillas+""">Código</label>
-      <input class="col-12 col-m-9" readonly disabled type="text" name="""+comillas+table_data[0]+"d"+comillas+""" ="""+comillas+table_data[0]+"d"+comillas+""" placehoder="Código" value="""+comillas+abrellave+abrellave+table_data[0]+cierrallave+cierrallave+comillas+"""/>
+      <input class="col-12 col-m-9" readonly disabled type="text" name="""+comillas+table_data[0]+"d"+comillas+""" id="""+comillas+table_data[0]+"d"+comillas+""" placehoder="Código" value="""+comillas+abrellave+abrellave+table_data[0]+cierrallave+cierrallave+comillas+"""/>
       <input type="hidden" name="mode" value="{{mode}}" />
       <input type="hidden" name="""+comillas+table_data[0]+comillas+""" value="""+comillas+abrellave+abrellave+table_data[0]+cierrallave+cierrallave+comillas+""" />
       <input type="hidden" name="token" value="{{"""+lowerPlural+"""_xss_token}}" />
@@ -402,7 +402,7 @@ contenido = """
     """+htmlTable2+"""
     <div class="row my-2 align-center">
       <label class="col-12 col-m-3" for="""+comillas+table_data[longitud-1]+comillas+""">Estado</label>
-      <select name="""+comillas+table_data[longitud-1]+comillas+"""" id="""+comillas+table_data[longitud-1]+comillas+""" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
+      <select name="""+comillas+table_data[longitud-1]+comillas+""" id="""+comillas+table_data[longitud-1]+comillas+""" class="col-12 col-m-9" {{if readonly}} readonly disabled {{endif readonly}}>
         <option value="ACT" {{if """+table_data[longitud-1]+"""_act}}selected{{endif """+table_data[longitud-1]+"""_act}}>Mostrar</option>
         <option value="INA" {{if """+table_data[longitud-1]+"""_ina}}selected{{endif """+table_data[longitud-1]+"""_ina}}>Ocultar</option>
       </select>
@@ -420,7 +420,6 @@ contenido = """
         Regresar
         {{endifnot showCommitBtn}}
       </button>
-    </div>
     </div>
   </form>
 </section>

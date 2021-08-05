@@ -37,27 +37,33 @@ class EditarUsuario extends \Controllers\PublicController
 
             switch($viewData['mode']) {
             case 'UPD':
-                if($viewData['userpswd']){
-                    $ok = \Dao\Security\Security::updateUserClient(
-                        $viewData["useremail"],
-                        $viewData["username"],
-                        $viewData["userpswd"],
-                        $viewData["usercod"]
-                    );
+                if($viewData['useremail'] != ""){
+                    if($viewData['userpswd']){
+                        $ok = \Dao\Security\Security::updateUserClient(
+                            $viewData["useremail"],
+                            $viewData["username"],
+                            $viewData["userpswd"],
+                            $viewData["usercod"]
+                        );
+                    }else{
+                        $ok = \Dao\Security\Security::updateNoPass(
+                            $viewData["useremail"],
+                            $viewData["username"],
+                            $viewData["usercod"]
+                        );
+                    }
+                    if ($ok) {
+                        \Utilities\Site::redirectToWithMsg(
+                            'index.php?page=index',
+                            'Usuario actualizado Exitosamente'
+                        );
+                    }
+                    break;
                 }else{
-                    $ok = \Dao\Security\Security::updateNoPass(
-                        $viewData["useremail"],
-                        $viewData["username"],
-                        $viewData["usercod"]
-                    );
-                }
-                if ($ok) {
                     \Utilities\Site::redirectToWithMsg(
-                        'index.php?page=index',
-                        'Usuario actualizado Exitosamente'
-                    );
+                        'index.php?page=mnt_editarusuario&mode=UPD&id='.$viewData["usercod"],
+                        'No ingreso un correo valido');
                 }
-                break;
             }
 
         } else {

@@ -80,6 +80,17 @@ class ProductosPanel extends Table{
         return self::executeNonQuery($updSQL, $parameters);
     }
 
+    public static function updateProductoStock($ProdStock, $ProdId)
+    {
+        $updSQL = "UPDATE `productos` set `ProdStock`=:ProdStock  where `ProdId`=:ProdId;";
+        $parameters = array(
+            'ProdStock' => $ProdStock,
+            'ProdId' => $ProdId
+        );
+
+        return self::executeNonQuery($updSQL, $parameters);
+    }
+
     public static function deleteProducto($ProdId)
     {
         $delSQL = "DELETE FROM `productos`  where `ProdId`=:ProdId;";

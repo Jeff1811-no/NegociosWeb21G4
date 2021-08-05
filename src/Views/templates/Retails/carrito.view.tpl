@@ -22,12 +22,14 @@
             </td>
             <td>
               <form action="index.php?page=retails_carrito" method="post">
+              <input value="{{updown}}" min="0" max="1" id="updown" name="updown" type="hidden" />
                   <input value="{{producto}}" name="producto" type="hidden" />
-                  <input value="{{cantidad}}" name="cantidad" type="number" min="1" id="cantidad" onclick="totalb()" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
+                  <input value="{{cantidad}}" name="cantidad" type="number" min="1" max={{existencia}} id="cantidad" onclick="total()" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
               </form>
             </td>
             <td>
               <form action="index.php?page=retails_carrito" method="post">
+                <input value="{{cantidad}}" name="can" type="hidden" id="can"  />
                   <input value="{{producto}}" name="producto" type="hidden" />
                   <input name="btnEliminar" id="btnEliminar" type="submit" value="Eliminar" />
               </form>
@@ -44,8 +46,8 @@
       <p id="total" name="total"></p>
   </div>
   <hr width=100% />
-  <form method="post" action="index.php?page=retails_carrito">
-      <button type="submit" name="btnComprar" id="comprar" >Efectuar compra</button>
+  <form action="index.php?page=checkout_checkout" method="post">
+    <button type="submit">Efectuar Compra</button>
   </form>
 </section>
 
@@ -59,18 +61,16 @@
 
 <script>
 
-  totalb();
-
-  function totalb() {
+  total();
+  
+  function total(){
     let cantidad = 0;
     let precio = 0;
     let total = 0;
     var txttotal = document.getElementById("total");
     var cantidades = document.getElementsByName("cantidad");
     var precios = document.getElementsByName("precio");
-    console.log(cantidades);
-    for(var i = 0; i < cantidades.length; i++)
-    {
+    for(var i = 0; i < cantidades.length; i++){
       let subtotal = 0;
       cantidad = parseFloat(cantidades[i].value);
       precio = parseFloat(precios[i].value);
@@ -78,25 +78,25 @@
       {
         subtotal = cantidad * precio;
         total += subtotal;
-      } else {
-        document.getElementById("comprar").disabled=false;
       }
     }
     txttotal.innerHTML = total;
   };
-
-  var cantidades = document.getElementsByName("cantidad");
-  for(var i = 0; i < cantidades.length; i++)
-  {
-    cantidades[i].addEventListener("change",datoscan);
-  }
-  function datoscan(e)
-  {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log(e.target.parentNode);
-    e.target.parentNode.submit();
-  }
+  
+  if($("#total").is(':empty')) {$('#comprar').prop('disabled', true);}
+  
+  $("[name='cantidad']").each(function(){
+    $(this).on("change ", function (e) {
+      var direction = this.defaultValue < this.value;
+      this.defaultValue = this.value;
+      if (direction) {$("#updown").val("0");
+        $(this).parent().submit();
+      }else {
+        $("#updown").val("1");
+        $(this).parent().submit();
+      }
+    });
+  });
 
   
 

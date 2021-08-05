@@ -4,11 +4,9 @@
 
 {{if Admin}}
 
-<a></a>
-<a></a>
 
-<button id="roles" data-href="index.php?page=admin_roles">Roles</button>
-<button data-href="index.php?page=admin_funcionesroles">Funciones Roles</button>
+<button data-href="index.php?page=admin_roles" id="roles">Roles</button>
+<button data-href="index.php?page=admin_funcionesroles" id="funcionesroles">Funciones Roles</button>
 
 
 {{endif Admin}}
@@ -75,8 +73,13 @@
 
 
 <script>
-$("roles").click(function(){
-  var roles = "index.php?page=admin_roles";
+$("#roles").click(function(){
+  var roles = $(this).data('href');
+  document.location.href = roles;
+});
+
+$("#funcionesroles").click(function(){
+  var roles = $(this).data('href');
   document.location.href = roles;
 });
 

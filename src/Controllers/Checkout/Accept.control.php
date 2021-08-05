@@ -8,7 +8,7 @@ class Accept extends PublicController{
     {
         $dataview = array();
         $token = $_GET["token"] ?: "";
-        $session_token = $_SESSION["orderid"] ?: "";
+        $session_token = $_SESSION["orderid"] ? : "";
         if ($token !== "" && $token == $session_token) {
             $result = \Utilities\Paypal\PayPalCapture::captureOrder($session_token);
             $dataview["orderjson"] = json_encode($result, JSON_PRETTY_PRINT);
