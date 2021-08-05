@@ -13,19 +13,19 @@
 
 {{endif Admin}}
 
-<section class="WWList">
-  <table >
-    <thead>
+<section class="">
+  <table class="table">
+    <thead class="table-dark">
       <tr>
-      <th>Código</th>
-      <th>Correo</th>
-      <th>Estado</th>
+      <th scope="col">Código</th>
+      <th scope="col">Correo</th>
+      <th scope="col">Estado</th>
       {{if Admin}}
-      <th>Rol</th>
+      <th scope="col">Rol</th>
       {{endif Admin}}
-      <th>
+      <th scope="col">
         {{if CanInsert}}
-        <a href="index.php?page=mnt_usuario&mode=INS">Nuevo</a>
+        <a href="index.php?page=mnt_usuario&mode=INS" class="text-white">Nuevo +</a>
         {{endif CanInsert}}
       </th>
       </tr>
